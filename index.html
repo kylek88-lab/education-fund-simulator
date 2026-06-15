@@ -1234,6 +1234,22 @@
       return Number.isNaN(v) ? fallback : v;
     }
 
+    /** 子どもの年齢入力値を取得（空欄のときは計算用に0、入力欄は上書きしない） */
+    function getChildAgeFromInput() {
+      const raw = String(inputs.childAge.value).trim();
+      if (raw === '') return 0;
+      const v = parseFloat(raw);
+      if (Number.isNaN(v)) return 0;
+      return Math.max(0, Math.min(GOAL_AGE, Math.round(v)));
+    }
+
+    /** 年齢入力欄を正規化（入力中の空欄はそのまま残す） */
+    function syncChildAgeInputValue(force) {
+      const raw = String(inputs.childAge.value).trim();
+      if (raw === '' && !force) return;
+      inputs.childAge.value = getChildAgeFromInput();
+    }
+
     // ── 金額入力欄（カンマ区切り + ヒント） ────────────────
 
     function setupMoneyInput(el, hintEl, unit) {
@@ -1670,14 +1686,14 @@
     // ── 画面更新 ────────────────────────────────────────────
 
     function update() {
-      const childAge = Math.max(0, Math.round(parseNumberInput(inputs.childAge, 0)));
+      const childAge = getChildAgeFromInput();
       const targetMan = parseInputNumber(inputs.targetAmount.value);
       const targetYen = targetMan * 10000;
       const initialFundYen = parseInputNumber(inputs.currentFund.value);
       const monthlyContributionYen = parseInputNumber(inputs.monthlyContribution.value);
       const returnRate = Math.max(0, parseNumberInput(inputs.returnRate, 0));
 
-      inputs.childAge.value = Math.min(GOAL_AGE, childAge);
+      syncChildAgeInputValue(false);
       syncPresetButtons(targetMan);
 
       const simParams = {
@@ -1717,6 +1733,11 @@
     hints.monthlyContribution.textContent = formatYen(parseInputNumber(inputs.monthlyContribution.value));
 
     inputs.childAge.addEventListener('input', update);
+    inputs.childAge.addEventListener('change', update);
+    inputs.childAge.addEventListener('blur', () => {
+      syncChildAgeInputValue(true);
+      update();
+    });
     inputs.returnRate.addEventListener('input', update);
 
     update();

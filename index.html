@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-32YGB007DL"></script>
   <script>
@@ -11,60 +9,41 @@
     gtag('js', new Date());
     gtag('config', 'G-32YGB007DL');
   </script>
-  <meta name="description" content="子どもの大学進学に向けて、毎月の積立や運用を続けた場合の教育資金を無料で試算できます。目標額との差額や必要な積立額も確認できる教育費シミュレーターです。">
-  <title>教育費シミュレーター｜大学進学までの積立額を無料試算</title>
-  <meta property="og:title" content="教育費シミュレーター｜大学進学までの積立額を無料試算">
-  <meta property="og:description" content="子どもの大学進学に向けた教育資金を無料で試算できます。">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="" id="og-url">
-  <meta name="twitter:card" content="summary">
-  <script>
-    (function () {
-      var url = window.location.origin + window.location.pathname;
-      var ogUrl = document.getElementById('og-url');
-      if (ogUrl) ogUrl.setAttribute('content', url);
-    })();
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "x7zt8kdy69");
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>住宅ローン × 投資 比較シミュレーター</title>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #f0f4f8;
-      --surface: #ffffff;
-      --primary: #2563eb;
-      --primary-light: #dbeafe;
-      --text: #1e293b;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
-      --accent: #2563eb;
-      --goal: #7c3aed;
-      --goal-light: #ede9fe;
-      --good: #059669;
-      --good-light: #d1fae5;
-      --bad: #dc2626;
-      --bad-light: #fee2e2;
-      --warn: #ea580c;
-      --warn-light: #ffedd5;
-      --radius: 12px;
-      --shadow: 0 1px 3px rgba(0,0,0,.08), 0 4px 12px rgba(0,0,0,.06);
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      background: #f0f4f8;
+      color: #1a202c;
       line-height: 1.6;
-      min-height: 100vh;
       padding: 24px 16px 48px;
     }
 
     .container {
-      max-width: 960px;
+      max-width: 760px;
       margin: 0 auto;
     }
 
-    /* サイト共通ナビゲーション（資産推移シミュレーターと統一） */
+    /* PC表示: コンテナ幅を広げて2列レイアウトに対応 */
+    @media (min-width: 768px) {
+      .container {
+        max-width: 1080px;
+      }
+    }
+
+    /* サイト共通ナビゲーション */
     .site-nav {
       margin-bottom: 16px;
     }
@@ -75,12 +54,12 @@
       align-items: center;
       gap: 6px;
       font-size: 0.82rem;
-      color: var(--text-muted);
+      color: #64748b;
       line-height: 1.5;
     }
 
     .breadcrumb a {
-      color: var(--text-muted);
+      color: #64748b;
       text-decoration: none;
       transition: color 0.15s ease;
     }
@@ -124,82 +103,147 @@
       border-radius: 12px;
       padding: 28px 24px;
       margin-bottom: 24px;
-      text-align: center;
     }
 
-    header h1 {
-      font-size: clamp(1.25rem, 4vw, 1.4rem);
+    header h1 { font-size: 1.4rem; margin-bottom: 8px; }
+    header p { font-size: 0.9rem; opacity: 0.9; }
+
+    /* 表示単位切替（画面上部・青背景に合わせた白文字） */
+    .display-unit-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 16px;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff;
+    }
+
+    .display-unit-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .display-unit-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+    }
+
+    .display-unit-option {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.85);
+      cursor: pointer;
+    }
+
+    .display-unit-option input {
+      flex: none;
+      width: auto;
+      margin: 0;
+      accent-color: #fff;
+    }
+
+    .display-unit-option:has(input:checked) {
       font-weight: 700;
-      margin-bottom: 8px;
+      color: #fff;
     }
 
-    .header-desc {
-      max-width: 560px;
-      margin: 0 auto;
+    section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1px solid #e8edf3;
     }
 
-    .header-desc p {
-      font-size: 0.9rem;
-      opacity: 0.9;
-      line-height: 1.75;
+    /* メインレイアウト: スマホは縦1列（DOM順） */
+    .main-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
 
-    .header-desc p + p {
-      margin-top: 8px;
+    .main-layout > section {
+      margin-bottom: 0;
     }
 
-    .disclaimer {
-      margin-top: 36px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border);
-      max-width: 640px;
-      margin-left: auto;
-      margin-right: auto;
-      font-size: 0.75rem;
-      color: #94a3b8;
-      line-height: 1.75;
-      text-align: center;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-
+    /*
+     * PC表示（768px以上）: 2列グリッド
+     * 左列 = 入力条件 + 投資比較
+     * 右列 = 利息比較 + 判断支援
+     * 金利感応度分析 = 全幅（下部）
+     */
     @media (min-width: 768px) {
-      .grid {
-        grid-template-columns: 340px 1fr;
-        align-items: start;
+      .main-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+          "input   interest"
+          "invest  judgment"
+          "sensitivity sensitivity";
+        gap: 20px 24px;
+        align-items: stretch;
+      }
+
+      .section-input      { grid-area: input; }
+      .section-interest   { grid-area: interest; }
+      .section-invest     { grid-area: invest; }
+      .section-judgment   { grid-area: judgment; }
+      .section-sensitivity { grid-area: sensitivity; }
+
+      /* 各列のカード高を揃えやすくする */
+      .main-layout > section {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
       }
     }
 
-    .card {
-      background: var(--surface);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 24px;
+    /* 右列が狭いPC幅ではカードを縦積み */
+    @media (min-width: 768px) and (max-width: 959px) {
+      .section-interest .interest-cards,
+      .section-judgment .judgment-cards {
+        grid-template-columns: 1fr;
+      }
     }
 
-    .card h2 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 20px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--primary-light);
-      color: var(--primary);
+    h2 {
+      font-size: 1.05rem;
+      color: #2d3748;
+      margin-bottom: 6px;
     }
 
-    .form-group {
-      margin-bottom: 16px;
+    .section-desc {
+      font-size: 0.85rem;
+      color: #718096;
+      margin-bottom: 18px;
     }
 
-    .form-group:last-child { margin-bottom: 0; }
+    .step-badge {
+      display: inline-block;
+      background: #ebf8ff;
+      color: #2b6cb0;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 99px;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    .field { margin-bottom: 16px; }
 
     label {
       display: block;
-      font-size: 0.8125rem;
+      font-size: 0.85rem;
       font-weight: 600;
+      color: #4a5568;
       margin-bottom: 6px;
     }
 
@@ -209,503 +253,377 @@
       gap: 8px;
     }
 
-    input[type="number"],
-    input[type="text"].money-input {
+    input {
       flex: 1;
-      width: 100%;
       padding: 10px 12px;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
       font-size: 1rem;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
       font-family: inherit;
-      color: var(--text);
-      background: var(--surface);
-      transition: border-color .2s;
-    }
-
-    input[type="number"] {
-      -moz-appearance: textfield;
-    }
-
-    input[type="number"]::-webkit-outer-spin-button,
-    input[type="number"]::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
     }
 
     input:focus {
       outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px var(--primary-light);
+      border-color: #3182ce;
+      box-shadow: 0 0 0 3px rgba(49,130,206,0.2);
     }
 
     .unit {
-      font-size: 0.8125rem;
-      color: var(--text-muted);
-      white-space: nowrap;
+      font-size: 0.85rem;
+      color: #718096;
+      min-width: 2.5em;
     }
 
     .hint {
-      margin-top: 6px;
-      font-size: 0.75rem;
-      color: var(--text-muted);
+      font-size: 0.78rem;
+      color: #a0aec0;
+      margin-top: 4px;
     }
 
-    /* 教育資金目標額プリセット */
-    .preset-group {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    .radio-group {
+      display: flex;
+      flex-direction: column;
       gap: 8px;
-      margin-top: 10px;
     }
 
-    @media (min-width: 400px) {
-      .preset-group {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    .preset-btn {
+    .radio-option {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 2px;
-      min-height: 48px;
-      padding: 10px 8px;
-      border: 1.5px solid rgba(37, 99, 235, 0.35);
+      gap: 8px;
+      padding: 10px 12px;
+      border: 1px solid #e2e8f0;
       border-radius: 8px;
-      background: var(--surface);
-      color: var(--primary);
-      font-family: inherit;
-      font-size: 0.8125rem;
-      font-weight: 700;
-      line-height: 1.3;
+      background: #fafbfc;
       cursor: pointer;
-      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
-      -webkit-tap-highlight-color: transparent;
+      font-size: 0.9rem;
     }
 
-    .preset-btn span {
-      font-size: 0.6875rem;
-      font-weight: 600;
-      color: var(--text-muted);
+    .radio-option:has(input:checked) {
+      border-color: #90cdf4;
+      background: #ebf8ff;
     }
 
-    .preset-btn:hover,
-    .preset-btn:focus-visible {
-      background: var(--primary-light);
-      border-color: var(--primary);
-      outline: none;
+    .radio-option input {
+      flex: none;
+      width: auto;
+      margin: 0;
     }
 
-    .preset-btn.active {
-      background: linear-gradient(135deg, #2b6cb0, #3182ce);
-      border-color: #2b6cb0;
-      color: #fff;
-      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+    .error {
+      background: #fff5f5;
+      border: 1px solid #feb2b2;
+      color: #c53030;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+      display: none;
     }
 
-    .preset-btn.active span {
-      color: rgba(255, 255, 255, 0.85);
-    }
+    .error.show { display: block; }
 
-    .results {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-
-    .result-item {
-      background: linear-gradient(135deg, var(--primary-light) 0%, #eff6ff 100%);
+    /* ローン概要カード */
+    .loan-overview {
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
       border-radius: 10px;
-      padding: 14px 12px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
     }
 
-    .result-item.age18 {
-      background: linear-gradient(135deg, var(--goal-light) 0%, #f5f3ff 100%);
-    }
-
-    .result-item.age18.featured {
-      padding: 22px 18px;
-      min-height: 168px;
-      border: 2px solid rgba(124, 58, 237, 0.35);
-      box-shadow: 0 4px 18px rgba(124, 58, 237, 0.12);
-    }
-
-    @media (min-width: 768px) {
-      .result-item.age18.featured {
-        padding: 26px 22px;
-        min-height: 180px;
-      }
-    }
-
-    .result-header {
-      text-align: center;
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid rgba(255,255,255,.6);
-    }
-
-    .result-label {
-      font-size: 0.8125rem;
+    .loan-overview-title {
+      font-size: 0.78rem;
       font-weight: 700;
-      color: var(--text);
+      color: #4a5568;
+      margin-bottom: 10px;
+      letter-spacing: 0.02em;
     }
 
-    .result-item.age18.featured .result-label {
-      font-size: 1rem;
-    }
-
-    .result-badge {
-      display: inline-block;
-      margin-left: 6px;
-      padding: 2px 8px;
-      font-size: 0.625rem;
-      font-weight: 700;
-      color: var(--goal);
-      background: rgba(124, 58, 237, 0.12);
-      border-radius: 999px;
-      vertical-align: middle;
-    }
-
-    .result-age {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    .result-remaining {
-      display: inline-block;
-      margin-top: 6px;
-      padding: 3px 10px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--primary);
-      background: rgba(37, 99, 235, 0.1);
-      border-radius: 999px;
-    }
-
-    .result-remaining.ended {
-      color: var(--text-muted);
-      background: rgba(100, 116, 139, 0.12);
-    }
-
-    /* 18歳時点カードの判定バッジ */
-    .status-badge {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 5px 12px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      border-radius: 999px;
-      line-height: 1.3;
-    }
-
-    .status-badge.good {
-      color: var(--good);
-      background: var(--good-light);
-      border: 1px solid rgba(5, 150, 105, 0.35);
-    }
-
-    .status-badge.warning {
-      color: var(--bad);
-      background: var(--bad-light);
-      border: 1px solid rgba(220, 38, 38, 0.35);
-    }
-
-    .status-badge.neutral {
-      color: var(--text-muted);
-      background: #f1f5f9;
-      border: 1px solid var(--border);
-    }
-
-    .result-value {
-      text-align: center;
-      font-size: clamp(1.25rem, 4vw, 1.5rem);
-      font-weight: 700;
-      color: var(--primary);
-      line-height: 1.3;
-    }
-
-    .result-item.age18.featured .result-value {
-      color: var(--goal);
-    }
-
-    .result-sub {
-      margin-top: 8px;
-      text-align: center;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    /* 目標との差額カード */
-    .diff-card {
-      border-radius: 10px;
-      padding: 18px 16px;
-      border: 1.5px solid transparent;
-      text-align: center;
-    }
-
-    .diff-card.good {
-      background: linear-gradient(135deg, var(--good-light) 0%, #ecfdf5 100%);
-      border-color: rgba(5, 150, 105, 0.35);
-    }
-
-    .diff-card.bad {
-      background: linear-gradient(135deg, var(--bad-light) 0%, #fef2f2 100%);
-      border-color: rgba(220, 38, 38, 0.35);
-    }
-
-    .diff-card.neutral {
-      background: #f8fafc;
-      border-color: var(--border);
-    }
-
-    .diff-title {
-      font-size: 0.8125rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .diff-value {
-      font-size: clamp(1.125rem, 3.5vw, 1.375rem);
-      font-weight: 700;
-      line-height: 1.4;
-    }
-
-    .diff-card.good .diff-value { color: var(--good); }
-    .diff-card.bad .diff-value { color: var(--bad); }
-    .diff-card.neutral .diff-value { color: var(--text-muted); }
-
-    .diff-note {
-      margin-top: 8px;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-    }
-
-    /* 必要積立額（逆算）カード */
-    .required-card {
-      border-radius: 10px;
-      padding: 18px 16px;
-      border: 1.5px solid transparent;
-      text-align: center;
-    }
-
-    .required-card.good {
-      background: linear-gradient(135deg, var(--good-light) 0%, #ecfdf5 100%);
-      border-color: rgba(5, 150, 105, 0.35);
-    }
-
-    .required-card.warning {
-      background: linear-gradient(135deg, var(--warn-light) 0%, #fff7ed 100%);
-      border-color: rgba(234, 88, 12, 0.35);
-    }
-
-    .required-card.neutral {
-      background: #f8fafc;
-      border-color: var(--border);
-    }
-
-    .required-title {
-      font-size: 0.8125rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .required-message {
-      font-size: clamp(1rem, 3vw, 1.125rem);
-      font-weight: 700;
-      line-height: 1.5;
-    }
-
-    .required-card.good .required-message { color: var(--good); }
-    .required-card.warning .required-message { color: var(--warn); }
-    .required-card.neutral .required-message {
-      color: var(--text-muted);
-      font-size: 0.875rem;
-      font-weight: 600;
-    }
-
-    .required-note {
-      margin-top: 8px;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    /* 判定カード */
-    .judgment-card {
-      border-radius: 10px;
-      padding: 18px 16px;
-      border: 1.5px solid transparent;
-    }
-
-    .judgment-card.good {
-      background: linear-gradient(135deg, var(--good-light) 0%, #ecfdf5 100%);
-      border-color: rgba(5, 150, 105, 0.35);
-    }
-
-    .judgment-card.warning {
-      background: linear-gradient(135deg, var(--bad-light) 0%, #fef2f2 100%);
-      border-color: rgba(220, 38, 38, 0.35);
-    }
-
-    .judgment-card.unavailable {
-      background: #f8fafc;
-      border-color: var(--border);
-    }
-
-    .judgment-title {
-      font-size: 0.8125rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .judgment-message {
-      font-size: clamp(1rem, 3vw, 1.125rem);
-      font-weight: 700;
-      line-height: 1.5;
-    }
-
-    .judgment-detail {
-      margin-top: 8px;
-      font-size: 0.875rem;
-      font-weight: 700;
-      line-height: 1.5;
-    }
-
-    .judgment-card.good .judgment-detail { color: var(--good); }
-    .judgment-card.warning .judgment-detail { color: var(--bad); }
-
-    .judgment-card.good .judgment-message { color: var(--good); }
-    .judgment-card.warning .judgment-message { color: var(--bad); }
-    .judgment-card.unavailable .judgment-message {
-      color: var(--text-muted);
-      font-size: 0.875rem;
-      font-weight: 600;
-    }
-
-    .judgment-note {
-      margin-top: 10px;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    /* おすすめアクション */
-    .action-card {
-      border-radius: 10px;
-      padding: 18px 16px;
-      border: 1.5px solid rgba(37, 99, 235, 0.22);
-      background: linear-gradient(135deg, var(--primary-light) 0%, #eff6ff 100%);
-    }
-
-    .action-card.good {
-      background: linear-gradient(135deg, var(--good-light) 0%, #ecfdf5 100%);
-      border-color: rgba(5, 150, 105, 0.35);
-    }
-
-    .action-card.warning {
-      background: linear-gradient(135deg, var(--warn-light) 0%, #fff7ed 100%);
-      border-color: rgba(234, 88, 12, 0.35);
-    }
-
-    .action-card.neutral {
-      background: #f8fafc;
-      border-color: var(--border);
-    }
-
-    .action-title {
-      font-size: 0.8125rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-    }
-
-    .action-rows {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .action-row {
+    .loan-overview-row {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       gap: 12px;
-      padding: 10px 0;
-      font-size: 0.8125rem;
+      padding: 6px 0;
     }
 
-    .action-row + .action-row {
-      border-top: 1px solid rgba(100, 116, 139, 0.18);
+    .loan-overview-row + .loan-overview-row {
+      border-top: 1px solid #edf2f7;
     }
 
-    .action-row-label {
-      color: var(--text-muted);
-      font-weight: 600;
+    .loan-overview-row.highlight {
+      background: #f0fff4;
+      margin: 6px -8px 0;
+      padding: 8px;
+      border-radius: 6px;
+      border-top: none;
+    }
+
+    .loan-overview-label {
+      font-size: 0.82rem;
+      color: #718096;
       flex-shrink: 0;
     }
 
-    .action-row-value {
+    .loan-overview-value {
+      font-size: 1.05rem;
       font-weight: 700;
-      color: var(--text);
+      color: #2d3748;
       text-align: right;
     }
 
-    .action-row-value.increase {
-      color: var(--warn);
+    .loan-overview-value.accent { color: #2b6cb0; }
+    .loan-overview-value.saved { color: #276749; }
+
+    .loan-overview-note {
+      font-size: 0.82rem;
+      color: #718096;
+      margin: 4px 0 0;
+      padding-top: 6px;
+      border-top: 1px solid #edf2f7;
     }
 
-    .action-summary {
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px solid rgba(100, 116, 139, 0.18);
-      font-size: 0.875rem;
+    /* 利息サマリー（3枚カード） */
+    .interest-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    @media (min-width: 560px) {
+      .interest-cards {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .interest-card {
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      text-align: center;
+    }
+
+    .interest-card.before {
+      background: #fff5f5;
+      border-color: #feb2b2;
+    }
+
+    .interest-card.after {
+      background: #ebf8ff;
+      border-color: #90cdf4;
+    }
+
+    .interest-card.saved {
+      background: #f0fff4;
+      border-color: #9ae6b4;
+    }
+
+    .interest-card-label {
+      font-size: 0.78rem;
+      color: #718096;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .interest-card-value {
+      font-size: 1.2rem;
       font-weight: 700;
-      line-height: 1.5;
-      text-align: center;
     }
 
-    .action-card.good .action-summary { color: var(--good); }
-    .action-card.warning .action-summary { color: var(--warn); }
-    .action-card.neutral .action-summary {
-      color: var(--text-muted);
-      font-size: 0.8125rem;
+    .interest-card.before .interest-card-value { color: #c53030; }
+    .interest-card.after .interest-card-value { color: #2b6cb0; }
+    .interest-card.saved .interest-card-value { color: #276749; }
+
+    /* 棒グラフ */
+    .chart-title {
+      font-size: 0.9rem;
       font-weight: 600;
+      color: #4a5568;
+      margin-bottom: 14px;
     }
 
-    .action-footnote {
-      margin-top: 10px;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      line-height: 1.55;
+    .chart {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .chart-row {
+      display: grid;
+      grid-template-columns: 130px 1fr 90px;
+      align-items: center;
+      gap: 10px;
+    }
+
+    @media (max-width: 480px) {
+      .chart-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+      .chart-bar-wrap { order: 2; }
+      .chart-amount { order: 1; text-align: left !important; }
+    }
+
+    .chart-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #4a5568;
+      line-height: 1.3;
+    }
+
+    .chart-bar-wrap {
+      background: #edf2f7;
+      border-radius: 8px;
+      height: 32px;
+      overflow: hidden;
+    }
+
+    .chart-bar {
+      height: 100%;
+      border-radius: 8px;
+      transition: width 0.4s ease;
+      min-width: 2px;
+    }
+
+    .chart-bar.bar-before { background: #fc8181; }
+    .chart-bar.bar-after { background: #63b3ed; }
+    .chart-bar.bar-saved { background: #68d391; }
+
+    .chart-amount {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #2d3748;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .chart-note {
+      margin-top: 14px;
+      padding: 12px 14px;
+      background: #f7fafc;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: #4a5568;
+      border-left: 4px solid #68d391;
+    }
+
+    .chart-note strong { color: #276749; }
+
+    /* 投資比較 */
+    .results {
+      display: grid;
+      gap: 12px;
+    }
+
+    .result-item {
+      padding: 16px;
+      border-radius: 10px;
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+    }
+
+    .result-item.verdict { background: #f0fff4; border-color: #9ae6b4; }
+    .result-item.verdict.invest-better { background: #e6fffa; border-color: #81e6d9; }
+    .result-item.verdict.prepay-better { background: #faf5ff; border-color: #d6bcfa; }
+
+    .result-label {
+      font-size: 0.8rem;
+      color: #718096;
+      margin-bottom: 4px;
+    }
+
+    .result-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #2d3748;
+    }
+
+    .result-value.positive { color: #276749; }
+    .result-value.negative { color: #9b2c2c; }
+
+    .result-sub {
+      font-size: 0.8rem;
+      color: #718096;
+      margin-top: 4px;
+    }
+
+    /* 金利感応度 */
+    .sensitivity-table-wrap {
+      overflow-x: auto;
+      margin-bottom: 24px;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+    }
+
+    .sensitivity-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      min-width: 520px;
+    }
+
+    .sensitivity-table th,
+    .sensitivity-table td {
+      padding: 10px 12px;
+      text-align: right;
+      border-bottom: 1px solid #edf2f7;
+    }
+
+    .sensitivity-table th {
+      background: #f7fafc;
+      color: #4a5568;
+      font-weight: 600;
       text-align: center;
     }
 
-    .chart-wrap {
-      position: relative;
+    .sensitivity-table th:first-child,
+    .sensitivity-table td:first-child {
+      text-align: center;
+      font-weight: 600;
+      color: #2d3748;
+    }
+
+    .sensitivity-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .sensitivity-table tr.current-rate {
+      background: #ebf8ff;
+    }
+
+    .sensitivity-table tr.current-rate td:first-child::after {
+      content: "（現在）";
+      font-size: 0.72rem;
+      color: #2b6cb0;
+      font-weight: 500;
+      margin-left: 4px;
+    }
+
+    .sensitivity-table .col-before { color: #c53030; }
+    .sensitivity-table .col-after { color: #2b6cb0; }
+    .sensitivity-table .col-saved { color: #276749; font-weight: 700; }
+
+    .line-chart-wrap {
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 16px 12px 8px;
+    }
+
+    .line-chart-wrap svg {
       width: 100%;
-      height: 300px;
+      height: auto;
+      display: block;
     }
 
-    @media (min-width: 768px) {
-      .chart-wrap { height: 360px; }
-    }
-
-    .chart-legend {
+    .line-chart-legend {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: 16px 24px;
-      margin-bottom: 12px;
-      font-size: 0.75rem;
-      color: var(--text-muted);
+      gap: 12px 20px;
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: #718096;
     }
 
     .legend-item {
@@ -714,210 +632,184 @@
       gap: 6px;
     }
 
-    .legend-swatch {
-      width: 14px;
-      height: 0;
-      border: 2px solid var(--primary);
-      border-radius: 0;
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
     }
 
-    .legend-swatch.goal {
-      border-style: dashed;
-      border-color: var(--goal);
-    }
+    .legend-dot.line { background: #38a169; }
+    .legend-dot.current { background: #3182ce; border: 2px solid #fff; box-shadow: 0 0 0 1px #3182ce; }
 
-    /* 教育費の目安（参考）カード */
-    .reference-card {
-      margin-top: 20px;
-      background: linear-gradient(135deg, var(--primary-light) 0%, #eff6ff 100%);
-      border: 1.5px solid rgba(37, 99, 235, 0.22);
-      border-radius: 10px;
-      padding: 18px 16px;
-    }
-
-    .reference-title {
-      font-size: 0.875rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid rgba(37, 99, 235, 0.15);
-    }
-
-    .reference-list {
-      list-style: none;
-    }
-
-    .reference-list li {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 12px;
-      padding: 8px 0;
-      font-size: 0.8125rem;
-      line-height: 1.5;
-    }
-
-    .reference-list li + li {
-      border-top: 1px solid rgba(37, 99, 235, 0.1);
-    }
-
-    .reference-label {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .reference-value {
-      color: var(--primary);
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .reference-footnote {
-      margin-top: 10px;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    .note {
-      margin-top: 16px;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    .note p + p { margin-top: 6px; }
-
-    /* 管理人のひとこと */
-    .admin-message {
-      margin-top: 20px;
-      background: var(--surface);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 20px;
-      border: 1px solid var(--border);
-    }
-
-    .admin-message-title {
-      font-size: 0.875rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 10px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid var(--primary-light);
-    }
-
-    .admin-message-text {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      line-height: 1.75;
-    }
-
-    .admin-message-text + .admin-message-text {
-      margin-top: 0.75em;
-    }
-
-    /* こんな方におすすめ */
-    .recommend-card {
-      background: linear-gradient(135deg, var(--primary-light) 0%, #eff6ff 100%);
-      border: 1.5px solid rgba(37, 99, 235, 0.22);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-
-    .recommend-title {
-      font-size: 0.9375rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid rgba(37, 99, 235, 0.2);
-    }
-
-    .recommend-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .recommend-list li {
-      position: relative;
-      padding-left: 1.1em;
-      font-size: 0.875rem;
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    .recommend-list li::before {
-      content: "・";
-      position: absolute;
-      left: 0;
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    /* 関連ツール */
-    .related-tools {
-      margin-top: 20px;
-      background: var(--surface);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 20px;
-      border: 1px solid var(--border);
-    }
-
-    .related-tools-title {
-      font-size: 0.875rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid var(--primary-light);
-    }
-
-    .related-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
+    /* 判断支援 */
+    .judgment-cards {
+      display: grid;
+      grid-template-columns: 1fr;
       gap: 10px;
+      margin-bottom: 16px;
     }
 
-    .related-item {
-      display: block;
-      padding: 14px 16px;
-      border: 1.5px solid var(--border);
+    @media (min-width: 560px) {
+      .judgment-cards {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .judgment-card {
+      padding: 16px 14px;
       border-radius: 10px;
-      background: #f8fafc;
-      text-decoration: none;
-      color: inherit;
-      transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+      border: 1px solid #e2e8f0;
+      text-align: center;
     }
 
-    .related-item:hover,
-    .related-item:focus-visible {
-      background: var(--primary-light);
-      border-color: rgba(37, 99, 235, 0.35);
-      outline: none;
-      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+    .judgment-card.breakeven {
+      background: #fffff0;
+      border-color: #f6e05e;
     }
 
-    .related-item-name {
-      display: block;
-      font-size: 0.875rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 4px;
+    .judgment-card.current {
+      background: #ebf8ff;
+      border-color: #90cdf4;
+    }
+
+    .judgment-card.verdict-card {
+      background: #f7fafc;
+      border-color: #e2e8f0;
+    }
+
+    .judgment-card.verdict-card.invest-better {
+      background: #e6fffa;
+      border-color: #81e6d9;
+    }
+
+    .judgment-card.verdict-card.prepay-better {
+      background: #faf5ff;
+      border-color: #d6bcfa;
+    }
+
+    .judgment-card.verdict-card.neutral {
+      background: #f0fff4;
+      border-color: #9ae6b4;
+    }
+
+    .judgment-card-label {
+      font-size: 0.78rem;
+      color: #718096;
+      margin-bottom: 8px;
       line-height: 1.4;
     }
 
-    .related-item-desc {
+    .judgment-card-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .judgment-card.breakeven .judgment-card-value { color: #b7791f; }
+    .judgment-card.current .judgment-card-value { color: #2b6cb0; }
+    .judgment-card.verdict-card.invest-better .judgment-card-value { color: #0987a0; }
+    .judgment-card.verdict-card.prepay-better .judgment-card-value { color: #6b46c1; }
+    .judgment-card.verdict-card.neutral .judgment-card-value { color: #276749; }
+
+    .judgment-note {
+      padding: 12px 14px;
+      background: #f7fafc;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: #4a5568;
+      border-left: 4px solid #f6e05e;
+      line-height: 1.7;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #a0aec0;
+      margin-top: 12px;
+      padding: 0 16px 20px;
+      line-height: 1.75;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    footer .footer-sub {
+      margin-top: 8px;
+      font-size: 0.72rem;
+      color: #b8c2cc;
+    }
+
+    /* 関連ツールカード */
+    .related-tools {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      border: 1px solid #e8edf3;
+    }
+
+    .related-tools-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #2d3748;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .related-tools-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    @media (min-width: 560px) {
+      .related-tools-list {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .related-tool-card {
       display: block;
-      font-size: 0.8125rem;
-      color: var(--text-muted);
+      padding: 14px 16px;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      background: #f7fafc;
+      text-decoration: none;
+      transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+    }
+
+    .related-tool-card:hover {
+      border-color: #90cdf4;
+      background: #ebf8ff;
+      box-shadow: 0 2px 6px rgba(49, 130, 206, 0.12);
+    }
+
+    .related-tool-badge {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #b7791f;
+      margin-bottom: 6px;
+    }
+
+    .related-tool-name {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #2b6cb0;
+      line-height: 1.45;
+      margin-bottom: 4px;
+    }
+
+    .related-tool-desc {
+      display: block;
+      font-size: 0.8rem;
+      color: #718096;
       line-height: 1.55;
     }
   </style>
@@ -928,819 +820,917 @@
       <div class="breadcrumb" aria-label="パンくずリスト">
         <a href="https://financial-tools-lab.vercel.app">ホーム</a>
         <span class="breadcrumb-sep" aria-hidden="true">&gt;</span>
-        <span class="breadcrumb-current" aria-current="page">教育費シミュレーター</span>
+        <span class="breadcrumb-current" aria-current="page">住宅ローン × 投資比較シミュレーター</span>
       </div>
       <a href="https://financial-tools-lab.vercel.app" class="back-to-top">← ツール集トップへ戻る</a>
     </nav>
 
     <header>
-      <h1>教育費シミュレーター</h1>
-      <div class="header-desc">
-        <p>子どもの大学進学に向けて、毎月の積立や運用を続けた場合、教育資金をどのくらい準備できるか試算できます。</p>
-        <p>大学進学までにどのくらい準備できるのか、目標額との差額や必要な積立額の目安を確認できます。</p>
+      <h1>住宅ローン × 投資 比較シミュレーター</h1>
+      <p>繰上返済するか、同じお金を投資するか。どちらが得か試算できます。</p>
+      <div class="display-unit-bar">
+        <span class="display-unit-label">表示単位</span>
+        <div class="display-unit-options">
+          <label class="display-unit-option">
+            <input type="radio" name="displayUnit" value="man" checked />
+            万円表示
+          </label>
+          <label class="display-unit-option">
+            <input type="radio" name="displayUnit" value="yen" />
+            円表示
+          </label>
+        </div>
       </div>
     </header>
 
-    <section class="recommend-card" aria-labelledby="recommend-heading">
-      <h2 class="recommend-title" id="recommend-heading">こんな方におすすめ</h2>
-      <ul class="recommend-list">
-        <li>0〜15歳のお子さまがいる方</li>
-        <li>教育費の準備を始めたい方</li>
-        <li>NISAと教育資金の両立を考えている方</li>
-        <li>大学進学費用の目安を知りたい方</li>
-      </ul>
+    <!-- メインコンテンツ（レイアウト制御は .main-layout の CSS Grid） -->
+    <main class="main-layout">
+
+    <!-- 入力 -->
+    <section class="section-input">
+      <h2><span class="step-badge">入力</span>条件を入力</h2>
+      <p class="section-desc">数字を変えると、下の結果が自動で更新されます。</p>
+      <div id="error" class="error"></div>
+
+      <div class="field">
+        <label for="balance">ローン残高</label>
+        <div class="input-wrap">
+          <input type="text" inputmode="numeric" id="balance" value="30000000" autocomplete="off" />
+          <span class="unit">円</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="rate">金利（年利）</label>
+        <div class="input-wrap">
+          <input type="number" id="rate" value="1.5" min="0" step="0.01" />
+          <span class="unit">%</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="years">残年数</label>
+        <div class="input-wrap">
+          <input type="number" id="years" value="25" min="1" step="1" />
+          <span class="unit">年</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="prepay">繰上返済額</label>
+        <div class="input-wrap">
+          <input type="text" inputmode="numeric" id="prepay" value="1000000" autocomplete="off" />
+          <span class="unit">円</span>
+        </div>
+        <p class="hint">この金額を繰上返済するか、投資に回すかを比較します</p>
+      </div>
+
+      <div class="field">
+        <label>繰上返済方式</label>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="prepayType" value="termReduction" checked />
+            期間短縮型（毎月返済額はそのまま、返済期間を短くする）
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="prepayType" value="paymentReduction" />
+            返済額軽減型（返済期間はそのまま、毎月返済額を減らす）
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="investRate">投資利回り（年利・期待値）</label>
+        <div class="input-wrap">
+          <input type="number" id="investRate" value="5" min="0" step="0.1" />
+          <span class="unit">%</span>
+        </div>
+      </div>
     </section>
 
-    <div class="grid">
-      <!-- 入力条件 -->
-      <section class="card">
-        <h2>入力条件</h2>
-        <form id="simForm" autocomplete="off">
-          <div class="form-group">
-            <label for="childAge">子どもの現在年齢</label>
-            <div class="input-wrap">
-              <input type="number" id="childAge" value="0" min="0" max="18" step="1">
-              <span class="unit">歳</span>
-            </div>
-            <p class="hint">18歳までの積立・運用をシミュレーションします</p>
-          </div>
-          <div class="form-group">
-            <label for="targetAmount">教育資金目標額</label>
-            <div class="input-wrap">
-              <input type="text" inputmode="numeric" class="money-input" id="targetAmount" value="500" autocomplete="off">
-              <span class="unit">万円</span>
-            </div>
-            <p class="hint" id="targetAmountHint">500万円</p>
-            <div class="preset-group" role="group" aria-label="教育資金目標額プリセット">
-              <button type="button" class="preset-btn" data-target="300" aria-pressed="false">
-                300万円<span>国公立中心</span>
-              </button>
-              <button type="button" class="preset-btn active" data-target="500" aria-pressed="true">
-                500万円<span>標準</span>
-              </button>
-              <button type="button" class="preset-btn" data-target="800" aria-pressed="false">
-                800万円<span>私立理系想定</span>
-              </button>
-              <button type="button" class="preset-btn" data-target="1000" aria-pressed="false">
-                1000万円<span>余裕を持つ</span>
-              </button>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="currentFund">現在の教育資金</label>
-            <div class="input-wrap">
-              <input type="text" inputmode="numeric" class="money-input" id="currentFund" value="0" autocomplete="off">
-              <span class="unit">円</span>
-            </div>
-            <p class="hint" id="currentFundHint">0円</p>
-          </div>
-          <div class="form-group">
-            <label for="monthlyContribution">毎月積立額</label>
-            <div class="input-wrap">
-              <input type="text" inputmode="numeric" class="money-input" id="monthlyContribution" value="10000" autocomplete="off">
-              <span class="unit">円</span>
-            </div>
-            <p class="hint" id="monthlyContributionHint">10,000円</p>
-          </div>
-          <div class="form-group">
-            <label for="returnRate">想定利回り</label>
-            <div class="input-wrap">
-              <input type="number" id="returnRate" value="3" min="0" max="30" step="0.1">
-              <span class="unit">%/年</span>
-            </div>
-            <p class="hint">積立資金全体に対する年率の運用益（月次で複利計算）</p>
-          </div>
-        </form>
-      </section>
+    <!-- 利息比較 -->
+    <section class="section-interest">
+      <h2><span class="step-badge">結果①</span>利息の比較</h2>
+      <p class="section-desc">繰上返済をすると、支払う利息がいくら減るかを確認できます。</p>
 
-      <!-- シミュレーション結果 -->
-      <section class="card">
-        <h2>シミュレーション結果</h2>
-        <div class="results">
-          <!-- ① 18歳時点の予想教育資金 -->
-          <div class="result-item age18 featured" id="cardAge18">
-            <div class="result-header">
-              <div class="result-label">18歳時点の予想教育資金<span class="result-badge">進学の目安</span></div>
-              <div class="result-age" id="age18Label">18 歳</div>
-              <div class="result-remaining" id="remainingYears">大学進学まで残り18年</div>
-              <div class="status-badge good" id="statusBadge">🎉 目標達成見込み</div>
-            </div>
-            <div class="result-value" id="projectedFund">—</div>
-            <p class="result-sub" id="projectedSub"></p>
-          </div>
-
-          <!-- ② 教育資金目標との差額（達成=緑 / 不足=赤） -->
-          <div class="diff-card neutral" id="diffCard">
-            <div class="diff-title">教育資金目標との差額</div>
-            <div class="diff-value" id="diffValue">—</div>
-            <p class="diff-note" id="diffNote"></p>
-          </div>
-
-          <!-- 必要積立額の逆算（達成=緑 / 不足=オレンジ） -->
-          <div class="required-card neutral" id="requiredCard">
-            <div class="required-title">目標達成に必要な積立</div>
-            <div class="required-message" id="requiredMessage">—</div>
-            <p class="required-note" id="requiredNote"></p>
-          </div>
-
-          <!-- ③ 判定 -->
-          <div class="judgment-card unavailable" id="judgmentCard">
-              <div class="judgment-title">判定</div>
-              <div class="judgment-message" id="judgmentMessage">—</div>
-              <p class="judgment-detail" id="judgmentDetail"></p>
-              <p class="judgment-note" id="judgmentNote"></p>
-          </div>
-
-          <!-- おすすめアクション -->
-          <div class="action-card neutral" id="actionCard">
-            <div class="action-title">おすすめアクション</div>
-            <div class="action-rows" id="actionRows">
-              <div class="action-row">
-                <span class="action-row-label">現在の積立額</span>
-                <span class="action-row-value" id="actionCurrent">—</span>
-              </div>
-              <div class="action-row">
-                <span class="action-row-label">目標達成に必要な積立額</span>
-                <span class="action-row-value" id="actionRequired">—</span>
-              </div>
-              <div class="action-row">
-                <span class="action-row-label">増額目安</span>
-                <span class="action-row-value increase" id="actionIncrease">—</span>
-              </div>
-            </div>
-            <p class="action-summary" id="actionSummary">—</p>
-            <p class="action-footnote">毎月の積立額を見直す際の参考値です。実際の教育費や運用成果を保証するものではありません。</p>
-          </div>
+      <!-- ローン概要: 毎月返済額と軽減額を表示 -->
+      <div class="loan-overview" id="loanOverview">
+        <div class="loan-overview-title">ローン概要</div>
+        <div class="loan-overview-row">
+          <span class="loan-overview-label">現在の毎月返済額</span>
+          <span class="loan-overview-value" id="monthlyPaymentBefore">—</span>
         </div>
+        <div id="loanOverviewExtra"></div>
+      </div>
 
-        <div class="chart-legend" aria-hidden="true">
-          <span class="legend-item"><span class="legend-swatch"></span>教育資金の推移</span>
-          <span class="legend-item"><span class="legend-swatch goal"></span>目標額</span>
+      <div class="interest-cards">
+        <div class="interest-card before">
+          <div class="interest-card-label">繰上返済前の<br>総利息額</div>
+          <div class="interest-card-value" id="totalInterestBefore">—</div>
         </div>
-        <div class="chart-wrap">
-          <canvas id="fundChart"></canvas>
+        <div class="interest-card after">
+          <div class="interest-card-label">繰上返済後の<br>総利息額</div>
+          <div class="interest-card-value" id="totalInterestAfter">—</div>
         </div>
-
-        <!-- 教育費の目安（参考・計算には不使用） -->
-        <aside class="reference-card" aria-label="教育費の目安（参考）">
-          <h3 class="reference-title">教育費の目安（参考）</h3>
-          <ul class="reference-list">
-            <li>
-              <span class="reference-label">国公立大学4年間</span>
-              <span class="reference-value">約250万円</span>
-            </li>
-            <li>
-              <span class="reference-label">私立文系4年間</span>
-              <span class="reference-value">約400万円</span>
-            </li>
-            <li>
-              <span class="reference-label">私立理系4年間</span>
-              <span class="reference-value">約550万円</span>
-            </li>
-          </ul>
-          <p class="reference-footnote">自宅外通学の場合はさらに増加する可能性があります。<br>※ 上記は参考情報であり、シミュレーション計算には使用していません。</p>
-        </aside>
-
-        <div class="note">
-          <p>※ 毎月末に積立を行い、想定利回りを12で割った月利で複利運用する想定です。</p>
-          <p>※ 18歳になるまで積立を継続し、18歳時点の資産残高を予想教育資金として表示します。</p>
-          <p>※ 目標額ラインは入力した教育資金目標額です。グラフの横軸は子どもの年齢です。</p>
+        <div class="interest-card saved">
+          <div class="interest-card-label">削減できた<br>利息</div>
+          <div class="interest-card-value" id="interestSaved">—</div>
         </div>
-      </section>
-    </div>
+      </div>
 
-    <aside class="admin-message" aria-labelledby="admin-message-heading">
-      <h2 class="admin-message-title" id="admin-message-heading">管理人のひとこと</h2>
-      <p class="admin-message-text">教育費は住宅ローンや老後資金と重なるため、想像以上に家計への影響が大きい支出です。</p>
-      <p class="admin-message-text">お子さまが小さいうちに試算しておくと、毎月の積立額の目安が見えやすくなります。</p>
-      <p class="admin-message-text">教育費だけでなく、住宅ローンや老後資金とのバランスも意識しながら、無理のない資産形成を考えてみてください。</p>
-    </aside>
+      <div class="chart-title">棒グラフで比較</div>
+      <div class="chart">
+        <div class="chart-row">
+          <div class="chart-label">繰上返済前<br>の総利息</div>
+          <div class="chart-bar-wrap">
+            <div class="chart-bar bar-before" id="barBefore" style="width: 100%"></div>
+          </div>
+          <div class="chart-amount" id="barBeforeAmount">—</div>
+        </div>
+        <div class="chart-row">
+          <div class="chart-label">繰上返済後<br>の総利息</div>
+          <div class="chart-bar-wrap">
+            <div class="chart-bar bar-after" id="barAfter" style="width: 0%"></div>
+          </div>
+          <div class="chart-amount" id="barAfterAmount">—</div>
+        </div>
+        <div class="chart-row">
+          <div class="chart-label">削減できた<br>利息</div>
+          <div class="chart-bar-wrap">
+            <div class="chart-bar bar-saved" id="barSaved" style="width: 0%"></div>
+          </div>
+          <div class="chart-amount" id="barSavedAmount">—</div>
+        </div>
+      </div>
 
-    <nav class="related-tools" aria-labelledby="related-tools-heading">
-      <h2 class="related-tools-title" id="related-tools-heading">関連ツール</h2>
-      <ul class="related-list">
-        <li>
-          <a class="related-item" href="https://asset-simulator-five.vercel.app/" target="_blank" rel="noopener noreferrer">
-            <span class="related-item-name">資産推移シミュレーター</span>
-            <span class="related-item-desc">毎月の積立や運用による資産形成を試算できます。</span>
-          </a>
-        </li>
-        <li>
-          <a class="related-item" href="https://mortgage-invest-simulator.vercel.app/" target="_blank" rel="noopener noreferrer">
-            <span class="related-item-name">🏆 人気No.1 住宅ローン × 投資比較シミュレーター</span>
-            <span class="related-item-desc">繰上返済と投資のどちらが有利か比較できます。</span>
-          </a>
-        </li>
-        <li>
-          <a class="related-item" href="https://car-cost-simulator-jet.vercel.app/" target="_blank" rel="noopener noreferrer">
-            <span class="related-item-name">車買い替え比較シミュレーター</span>
-            <span class="related-item-desc">現在の車を維持する場合と買い替える場合の費用を比較できます。</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+      <div class="chart-note" id="termNote"></div>
+    </section>
 
-    <footer class="disclaimer">
-      <p>※本シミュレーターは参考試算です。実際の教育費や運用成果を保証するものではありません。</p>
-      <p>税金、手数料、物価上昇率（インフレ）、学費の上昇等は考慮していません。ご利用にあたっては、ご自身で内容をご確認のうえご判断ください。</p>
+    <!-- 金利感応度分析 -->
+    <section class="section-sensitivity">
+      <h2><span class="step-badge">分析</span>金利感応度分析</h2>
+      <p class="section-desc">
+        金利が変わったとき、繰上返済による利息削減額がどう変わるかを比較します。
+        （選択中の繰上返済方式・ローン残高・残年数・繰上返済額を使用）
+      </p>
+
+      <div class="sensitivity-table-wrap">
+        <table class="sensitivity-table">
+          <thead>
+            <tr>
+              <th>金利</th>
+              <th>総利息（繰上前）</th>
+              <th>総利息（繰上後）</th>
+              <th>削減できる利息</th>
+            </tr>
+          </thead>
+          <tbody id="sensitivityBody"></tbody>
+        </table>
+      </div>
+
+      <div class="chart-title">折れ線グラフ：金利と利息削減額</div>
+      <div class="line-chart-wrap">
+        <svg id="sensitivityChart" viewBox="0 0 600 300" role="img" aria-label="金利と利息削減額の折れ線グラフ"></svg>
+        <div class="line-chart-legend">
+          <span class="legend-item"><span class="legend-dot line"></span>利息削減額</span>
+          <span class="legend-item"><span class="legend-dot current"></span>現在入力中の金利</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 投資比較 -->
+    <section class="section-invest">
+      <h2><span class="step-badge">結果②</span>投資との比較</h2>
+      <p class="section-desc">同じお金を投資に回した場合と比べてみましょう。</p>
+      <div class="results">
+        <div class="result-item">
+          <div class="result-label">投資した場合の将来資産額</div>
+          <div class="result-value" id="futureValue">—</div>
+          <div class="result-sub" id="investSub"></div>
+        </div>
+        <div class="result-item verdict" id="verdictBox">
+          <div class="result-label">差額（投資益 − 利息削減額）</div>
+          <div class="result-value" id="difference">—</div>
+          <div class="result-sub" id="verdictText"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 判断支援 -->
+    <section class="section-judgment">
+      <h2><span class="step-badge">結果③</span>判断支援</h2>
+      <p class="section-desc">
+        投資利益と利息削減額が同じになる投資利回り（損益分岐利回り）を表示します。
+      </p>
+
+      <div class="judgment-cards">
+        <div class="judgment-card breakeven">
+          <div class="judgment-card-label">損益分岐利回り</div>
+          <div class="judgment-card-value" id="breakEvenRate">—</div>
+        </div>
+        <div class="judgment-card current">
+          <div class="judgment-card-label">現在の投資利回り</div>
+          <div class="judgment-card-value" id="currentInvestRate">—</div>
+        </div>
+        <div class="judgment-card verdict-card" id="breakEvenVerdictCard">
+          <div class="judgment-card-label">判定</div>
+          <div class="judgment-card-value" id="breakEvenVerdict">—</div>
+        </div>
+      </div>
+
+      <div class="judgment-note" id="breakEvenNote"></div>
+    </section>
+
+    </main>
+
+    <!-- 関連ツール（管理人のひとことの下に配置） -->
+    <section class="related-tools" id="relatedTools">
+      <h2 class="related-tools-title">関連ツール</h2>
+      <div class="related-tools-list" id="relatedToolsList"></div>
+    </section>
+
+    <footer>
+      <p>※本シミュレーターは一定の条件に基づく参考試算です。実際の返済額や運用成果を保証するものではありません。ご利用にあたっては、ご自身で内容をご確認のうえご判断ください。</p>
+      <p class="footer-sub">元利均等返済で計算しています。投資は税前の試算です。</p>
     </footer>
   </div>
 
   <script>
-    // ── 定数 ────────────────────────────────────────────────
-    /** 大学進学の目標年齢 */
-    const GOAL_AGE = 18;
+    function monthlyRate(annualPercent) {
+      return annualPercent / 100 / 12;
+    }
 
-    // ── DOM 参照 ──────────────────────────────────────────
-    const inputs = {
-      childAge: document.getElementById('childAge'),
-      targetAmount: document.getElementById('targetAmount'),
-      currentFund: document.getElementById('currentFund'),
-      monthlyContribution: document.getElementById('monthlyContribution'),
-      returnRate: document.getElementById('returnRate'),
-    };
+    function calcMonthlyPayment(principal, annualRate, months) {
+      if (months <= 0) return 0;
+      var r = monthlyRate(annualRate);
+      if (r === 0) return principal / months;
+      var factor = Math.pow(1 + r, months);
+      return principal * r * factor / (factor - 1);
+    }
 
-    const hints = {
-      targetAmount: document.getElementById('targetAmountHint'),
-      currentFund: document.getElementById('currentFundHint'),
-      monthlyContribution: document.getElementById('monthlyContributionHint'),
-    };
+    function calcRemainingMonths(principal, annualRate, monthlyPayment) {
+      if (principal <= 0) return 0;
+      var r = monthlyRate(annualRate);
+      if (r === 0) return Math.ceil(principal / monthlyPayment);
+      if (monthlyPayment <= principal * r) {
+        throw new Error("返済額が利息以下のため計算できません");
+      }
+      var raw = -Math.log(1 - (principal * r) / monthlyPayment) / Math.log(1 + r);
+      return Math.ceil(raw);
+    }
 
-    const resultEls = {
-      projectedFund: document.getElementById('projectedFund'),
-      projectedSub: document.getElementById('projectedSub'),
-      age18Label: document.getElementById('age18Label'),
-      remainingYears: document.getElementById('remainingYears'),
-      statusBadge: document.getElementById('statusBadge'),
-      diffCard: document.getElementById('diffCard'),
-      diffValue: document.getElementById('diffValue'),
-      diffNote: document.getElementById('diffNote'),
-      judgmentCard: document.getElementById('judgmentCard'),
-      judgmentMessage: document.getElementById('judgmentMessage'),
-      judgmentDetail: document.getElementById('judgmentDetail'),
-      judgmentNote: document.getElementById('judgmentNote'),
-      requiredCard: document.getElementById('requiredCard'),
-      requiredMessage: document.getElementById('requiredMessage'),
-      requiredNote: document.getElementById('requiredNote'),
-      actionCard: document.getElementById('actionCard'),
-      actionRows: document.getElementById('actionRows'),
-      actionCurrent: document.getElementById('actionCurrent'),
-      actionRequired: document.getElementById('actionRequired'),
-      actionIncrease: document.getElementById('actionIncrease'),
-      actionSummary: document.getElementById('actionSummary'),
-    };
+    function formatYen(value) {
+      return formatMoney(value);
+    }
 
-    const presetButtons = document.querySelectorAll('.preset-btn');
+    /** 選択中の表示単位を取得（yen=円表示 / man=万円表示） */
+    function getDisplayUnit() {
+      var selected = document.querySelector('input[name="displayUnit"]:checked');
+      return selected ? selected.value : "man";
+    }
 
-    // ── 数値フォーマット ────────────────────────────────────
+    /**
+     * 金額の表示フォーマット
+     * ※ 内部計算は常に円。表示だけ切り替える
+     * 円表示: 30,000,000円
+     * 万円表示: 3,000万円
+     */
+    function formatMoney(value) {
+      if (getDisplayUnit() === "man") {
+        var man = Math.round(value / 10000);
+        return man.toLocaleString("ja-JP") + "万円";
+      }
+      return Math.round(value).toLocaleString("ja-JP") + "円";
+    }
 
-    /** 入力文字列から数値を取り出す（カンマは除去） */
+    /** 毎月の金額表示（例: 119,845円／月 または 12万円／月） */
+    function formatMoneyPerMonth(value) {
+      if (getDisplayUnit() === "man") {
+        var man = value / 10000;
+        var text = man.toLocaleString("ja-JP", {
+          maximumFractionDigits: 1,
+          minimumFractionDigits: 0
+        });
+        return text + "万円／月";
+      }
+      return Math.round(value).toLocaleString("ja-JP") + "円／月";
+    }
+
+    /** グラフ軸ラベル用の金額表示 */
+    function formatAxisMoney(value) {
+      if (getDisplayUnit() === "man") {
+        return Math.round(value / 10000).toLocaleString("ja-JP") + "万";
+      }
+      if (value >= 10000) {
+        return Math.round(value / 10000).toLocaleString("ja-JP") + "万";
+      }
+      return Math.round(value).toLocaleString("ja-JP");
+    }
+
+    /** 毎月返済額の表示用 */
+    function formatYenPerMonth(value) {
+      return formatMoneyPerMonth(value);
+    }
+
+    /** 入力文字列から数値を取り出す（カンマは除去して計算に使う） */
     function parseInputNumber(str) {
-      const cleaned = String(str).replace(/[,，\s]/g, '');
-      const n = Number(cleaned);
+      var cleaned = String(str).replace(/[,，\s]/g, "");
+      var n = Number(cleaned);
       return Number.isFinite(n) ? n : 0;
     }
 
-    /** 入力欄表示用のカンマ区切り */
+    /** 入力欄表示用のカンマ区切り（計算には使わない） */
     function formatInputComma(value) {
-      if (!Number.isFinite(value)) return '0';
-      return Math.round(value).toLocaleString('ja-JP');
+      if (!Number.isFinite(value) || value === 0) return "0";
+      return Math.round(value).toLocaleString("ja-JP");
     }
 
-    /** 万円単位の表示（資産推移シミュレーターと同様） */
-    function formatManYen(manYen) {
-      if (manYen >= 10000) {
-        return (manYen / 10000).toLocaleString('ja-JP', { maximumFractionDigits: 2 }) + '億円';
-      }
-      return manYen.toLocaleString('ja-JP', { maximumFractionDigits: 0 }) + '万円';
-    }
+    /**
+     * 金額入力欄のフォーカス制御
+     * ・入力中: カンマなしの数値
+     * ・フォーカス外: 3桁カンマ区切り
+     * ・計算は常に parseInputNumber() で数値化
+     */
+    function setupMoneyInput(id) {
+      var el = document.getElementById(id);
 
-    /** 円単位の表示 */
-    function formatYen(yen) {
-      return Math.round(yen).toLocaleString('ja-JP') + '円';
-    }
-
-    /** 結果表示用：円を万円/円で読みやすく表示 */
-    function formatMoney(yen) {
-      const abs = Math.abs(yen);
-      if (abs >= 10000) {
-        return formatManYen(abs / 10000);
-      }
-      return formatYen(abs);
-    }
-
-    function parseNumberInput(el, fallback) {
-      const v = parseFloat(el.value);
-      return Number.isNaN(v) ? fallback : v;
-    }
-
-    /** 子どもの年齢入力値を取得（空欄のときは計算用に0、入力欄は上書きしない） */
-    function getChildAgeFromInput() {
-      const raw = String(inputs.childAge.value).trim();
-      if (raw === '') return 0;
-      const v = parseFloat(raw);
-      if (Number.isNaN(v)) return 0;
-      return Math.max(0, Math.min(GOAL_AGE, Math.round(v)));
-    }
-
-    /** 年齢入力欄を正規化（入力中の空欄はそのまま残す） */
-    function syncChildAgeInputValue(force) {
-      const raw = String(inputs.childAge.value).trim();
-      if (raw === '' && !force) return;
-      inputs.childAge.value = getChildAgeFromInput();
-    }
-
-    // ── 金額入力欄（カンマ区切り + ヒント） ────────────────
-
-    function setupMoneyInput(el, hintEl, unit) {
-      el.addEventListener('focus', () => {
-        const num = parseInputNumber(el.value);
-        el.value = num === 0 ? '' : String(num);
+      el.addEventListener("focus", function () {
+        var num = parseInputNumber(el.value);
+        el.value = num === 0 ? "" : String(num);
       });
 
-      el.addEventListener('blur', () => {
-        const num = parseInputNumber(el.value);
+      el.addEventListener("blur", function () {
+        var num = parseInputNumber(el.value);
         el.value = formatInputComma(num);
-        if (hintEl) {
-          hintEl.textContent = unit === 'man'
-            ? formatManYen(num)
-            : formatYen(num);
-        }
       });
 
-      el.addEventListener('input', () => {
-        const num = parseInputNumber(el.value);
-        if (hintEl) {
-          hintEl.textContent = unit === 'man'
-            ? formatManYen(num)
-            : formatYen(num);
-        }
-        update();
-      });
+      el.addEventListener("input", calculate);
     }
 
-    // ── シミュレーション ────────────────────────────────────
+    function formatShortYen(value) {
+      return formatMoney(value);
+    }
+
+    function updateBar(barId, amountId, value, maxValue) {
+      var pct = maxValue > 0 ? (value / maxValue) * 100 : 0;
+      document.getElementById(barId).style.width = pct + "%";
+      document.getElementById(amountId).textContent = formatYen(value);
+    }
+
+    var SENSITIVITY_RATES = [0.5, 1.0, 1.5, 2.0, 2.5, 3.0];
+
+    /** 選択中の繰上返済方式を取得 */
+    function getPrepayType() {
+      var selected = document.querySelector('input[name="prepayType"]:checked');
+      return selected ? selected.value : "termReduction";
+    }
 
     /**
-     * 教育資金の推移を月次で計算
-     * ・毎月末に積立
-     * ・月利 = 年率 / 12 で複利運用
-     * ・18歳到達まで積立継続
-     * @returns {{ timeline: Array, projectedYen: number, targetYen: number }}
+     * 繰上返済シミュレーション（元利均等）
+     *
+     * 【期間短縮型 termReduction】
+     *   毎月返済額 M は変えず、残高を減らした分だけ返済期間を短縮
+     *   繰上後総支払額 = 繰上額 + M × 新残月数
+     *
+     * 【返済額軽減型 paymentReduction】
+     *   残月数 n は変えず、繰上後残高で毎月返済額 M' を再計算
+     *   M' = 新残高 × 月利 × (1+月利)^n / ((1+月利)^n − 1)
+     *   繰上後総支払額 = 繰上額 + M' × n
      */
-    function simulate(params) {
-      const {
-        childAge,
-        targetYen,
-        initialFundYen,
-        monthlyContributionYen,
-        annualReturnRate,
-      } = params;
+    function calcPrepaymentScenario(balance, annualRate, months, prepay, prepayType) {
+      if (prepay >= balance) return null;
 
-      const clampedAge = Math.max(0, Math.min(GOAL_AGE, Math.round(childAge)));
-      const monthlyRate = annualReturnRate / 100 / 12;
-      const monthsToGoal = Math.max(0, (GOAL_AGE - clampedAge) * 12);
+      var monthlyPaymentBefore = calcMonthlyPayment(balance, annualRate, months);
+      var totalInterestBefore = monthlyPaymentBefore * months - balance;
+      var newBalance = balance - prepay;
 
-      let balance = Math.max(0, initialFundYen);
-      const timeline = [{ age: clampedAge, fundYen: balance }];
-
-      // 月次シミュレーション（各年齢の誕生日時点 = 12ヶ月ごとに記録）
-      for (let month = 1; month <= monthsToGoal; month++) {
-        balance = balance * (1 + monthlyRate) + Math.max(0, monthlyContributionYen);
-
-        if (month % 12 === 0) {
-          timeline.push({
-            age: clampedAge + month / 12,
-            fundYen: balance,
-          });
+      if (prepayType === "termReduction") {
+        var newMonths;
+        try {
+          newMonths = calcRemainingMonths(newBalance, annualRate, monthlyPaymentBefore);
+        } catch (e) {
+          return null;
         }
-      }
-
-      // 18歳未満で月数が12の倍数で終わらない場合（通常は起きない）
-      if (timeline[timeline.length - 1].age !== GOAL_AGE && monthsToGoal > 0) {
-        timeline.push({ age: GOAL_AGE, fundYen: balance });
-      }
-
-      // すでに18歳の場合は積立なし・現在残高のみ
-      if (clampedAge >= GOAL_AGE) {
+        var totalPaymentAfter = prepay + monthlyPaymentBefore * newMonths;
         return {
-          timeline: [{ age: clampedAge, fundYen: balance }],
-          projectedYen: balance,
-          targetYen,
-          childAge: clampedAge,
+          totalInterestBefore: totalInterestBefore,
+          totalInterestAfter: totalPaymentAfter - balance,
+          interestSaved: totalInterestBefore - (totalPaymentAfter - balance),
+          monthlyPaymentBefore: monthlyPaymentBefore,
+          monthlyPaymentAfter: monthlyPaymentBefore,
+          remainingMonthsAfter: newMonths,
+          shortenedMonths: months - newMonths,
+          prepayType: "termReduction"
         };
       }
 
+      // 返済額軽減型
+      var monthlyPaymentAfter = calcMonthlyPayment(newBalance, annualRate, months);
+      var totalPaymentAfter = prepay + monthlyPaymentAfter * months;
       return {
-        timeline,
-        projectedYen: balance,
-        targetYen,
-        childAge: clampedAge,
+        totalInterestBefore: totalInterestBefore,
+        totalInterestAfter: totalPaymentAfter - balance,
+        interestSaved: totalInterestBefore - (totalPaymentAfter - balance),
+        monthlyPaymentBefore: monthlyPaymentBefore,
+        monthlyPaymentAfter: monthlyPaymentAfter,
+        remainingMonthsAfter: months,
+        shortenedMonths: 0,
+        prepayType: "paymentReduction"
       };
     }
 
-    /**
-     * 月次積立の将来価値を計算（simulate と同じロジック）
-     * グラフ用 simulate は変更せず、逆算専用に使用
-     */
-    function projectBalanceYen(initialFundYen, monthlyContributionYen, monthlyRate, months) {
-      if (months <= 0) return Math.max(0, initialFundYen);
+    /** 方式に応じた結果説明テキストを作成 */
+    function buildResultNote(result) {
+      var savePct = result.totalInterestBefore > 0
+        ? ((result.interestSaved / result.totalInterestBefore) * 100).toFixed(1)
+        : "0.0";
+      var detail = "";
 
-      let balance = Math.max(0, initialFundYen);
-      for (let month = 1; month <= months; month++) {
-        balance = balance * (1 + monthlyRate) + Math.max(0, monthlyContributionYen);
+      if (result.prepayType === "termReduction") {
+        var sm = result.shortenedMonths;
+        var ys = Math.floor(sm / 12);
+        var ms = sm % 12;
+        detail = "返済期間が ";
+        if (ys > 0) detail += ys + "年";
+        if (ms > 0) detail += ms + "ヶ月";
+        if (sm <= 0) detail += "変化なし";
+        else detail += " 短縮";
+        detail += "（" + result.remainingMonthsAfter + "ヶ月で完済）。";
+      } else {
+        var reduced = result.monthlyPaymentBefore - result.monthlyPaymentAfter;
+        detail = "月々返済額が " + formatYen(result.monthlyPaymentBefore) +
+          " → " + formatYen(result.monthlyPaymentAfter) +
+          " に軽減（月 " + formatYen(reduced) + " の負担軽減）。";
       }
-      return balance;
+
+      var intro = result.prepayType === "termReduction"
+        ? "返済期間を短縮し、利息を削減します。"
+        : "毎月返済額を軽減し、家計負担を減らします。";
+
+      return intro + "<br>" + detail +
+        " 利息は <strong>" + formatShortYen(result.interestSaved) +
+        "（" + savePct + "%）</strong> 削減できます。";
     }
 
     /**
-     * 目標達成に必要な「追加」の毎月積立額を逆算
-     * 現在の積立額に加えて、あと毎月いくら必要かを返す
+     * ローン概要カードを更新
+     *
+     * ・monthlyPaymentBefore … 繰上返済前の毎月返済額（常に表示）
+     * ・返済額軽減型 … monthlyPaymentAfter とその差額を表示
+     * ・期間短縮型 … 毎月返済額は据え置きの旨を表示
      */
-    function calcAdditionalMonthlyYen(params) {
-      const {
-        childAge,
-        targetYen,
-        initialFundYen,
-        monthlyContributionYen,
-        annualReturnRate,
-      } = params;
+    function renderLoanOverview(result) {
+      document.getElementById("monthlyPaymentBefore").textContent =
+        formatYenPerMonth(result.monthlyPaymentBefore);
 
-      const clampedAge = Math.max(0, Math.min(GOAL_AGE, Math.round(childAge)));
-      const monthsToGoal = Math.max(0, (GOAL_AGE - clampedAge) * 12);
+      var extra = document.getElementById("loanOverviewExtra");
 
-      if (clampedAge >= GOAL_AGE || monthsToGoal === 0) {
-        return { additionalYen: 0, achievable: initialFundYen >= targetYen };
+      if (result.prepayType === "paymentReduction") {
+        // 毎月軽減額 = 繰上前の返済額 − 繰上後の返済額
+        var monthlyReduction = result.monthlyPaymentBefore - result.monthlyPaymentAfter;
+        extra.innerHTML =
+          '<div class="loan-overview-row">' +
+          '<span class="loan-overview-label">返済額軽減後</span>' +
+          '<span class="loan-overview-value accent">' +
+          formatYenPerMonth(result.monthlyPaymentAfter) + "</span></div>" +
+          '<div class="loan-overview-row highlight">' +
+          '<span class="loan-overview-label">毎月軽減額</span>' +
+          '<span class="loan-overview-value saved">' +
+          formatYenPerMonth(monthlyReduction) + "</span></div>";
+      } else {
+        extra.innerHTML =
+          '<p class="loan-overview-note">期間短縮型のため、毎月返済額は変わりません</p>';
+      }
+    }
+
+    function isCurrentRate(inputRate, patternRate) {
+      return Math.abs(inputRate - patternRate) < 0.05;
+    }
+
+    function formatAxisYen(value) {
+      return formatAxisMoney(value);
+    }
+
+    function renderSensitivity(balance, years, prepay, currentRate, prepayType) {
+      var months = years * 12;
+      var tbody = document.getElementById("sensitivityBody");
+      var rows = [];
+      var chartData = [];
+
+      for (var i = 0; i < SENSITIVITY_RATES.length; i++) {
+        var r = SENSITIVITY_RATES[i];
+        var result = calcPrepaymentScenario(balance, r, months, prepay, prepayType);
+        var isCurrent = isCurrentRate(currentRate, r);
+
+        if (!result) {
+          rows.push(
+            "<tr" + (isCurrent ? ' class="current-rate"' : "") + ">" +
+            "<td>" + r.toFixed(1) + "%</td>" +
+            "<td colspan=\"3\" style=\"text-align:center;color:#a0aec0\">計算不可</td></tr>"
+          );
+          continue;
+        }
+
+        rows.push(
+          "<tr" + (isCurrent ? ' class="current-rate"' : "") + ">" +
+          "<td>" + r.toFixed(1) + "%</td>" +
+          "<td class=\"col-before\">" + formatYen(result.totalInterestBefore) + "</td>" +
+          "<td class=\"col-after\">" + formatYen(result.totalInterestAfter) + "</td>" +
+          "<td class=\"col-saved\">" + formatYen(result.interestSaved) + "</td>" +
+          "</tr>"
+        );
+        chartData.push({ rate: r, saved: result.interestSaved, isCurrent: isCurrent });
       }
 
-      const monthlyRate = annualReturnRate / 100 / 12;
-      const projectedWithCurrent = projectBalanceYen(
-        initialFundYen,
-        monthlyContributionYen,
-        monthlyRate,
-        monthsToGoal
-      );
+      tbody.innerHTML = rows.join("");
+      renderLineChart(chartData);
+    }
 
-      if (projectedWithCurrent >= targetYen) {
-        return { additionalYen: 0, achievable: true };
+    function renderLineChart(data) {
+      var svg = document.getElementById("sensitivityChart");
+      if (!data.length) {
+        svg.innerHTML = "";
+        return;
       }
 
-      if (monthlyRate === 0) {
-        const shortfall = targetYen - projectedWithCurrent;
-        return {
-          additionalYen: Math.ceil(shortfall / monthsToGoal),
-          achievable: false,
+      var W = 600, H = 300;
+      var padL = 72, padR = 24, padT = 24, padB = 48;
+      var plotW = W - padL - padR;
+      var plotH = H - padT - padB;
+
+      var minRate = 0.5, maxRate = 3.0;
+      var maxSaved = 0;
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].saved > maxSaved) maxSaved = data[i].saved;
+      }
+      if (maxSaved <= 0) maxSaved = 1;
+      var yMax = maxSaved * 1.1;
+
+      function xPos(rate) {
+        return padL + ((rate - minRate) / (maxRate - minRate)) * plotW;
+      }
+      function yPos(saved) {
+        return padT + plotH - (saved / yMax) * plotH;
+      }
+
+      var parts = [];
+
+      // グリッド線（横）
+      for (var g = 0; g <= 4; g++) {
+        var gy = padT + (plotH / 4) * g;
+        var gVal = yMax * (1 - g / 4);
+        parts.push("<line x1=\"" + padL + "\" y1=\"" + gy + "\" x2=\"" + (W - padR) + "\" y2=\"" + gy + "\" stroke=\"#e2e8f0\" stroke-width=\"1\"/>");
+        parts.push("<text x=\"" + (padL - 8) + "\" y=\"" + (gy + 4) + "\" text-anchor=\"end\" font-size=\"11\" fill=\"#718096\">" + formatAxisYen(gVal) + "</text>");
+      }
+
+      // グリッド線（縦）+ X軸ラベル
+      for (var j = 0; j < SENSITIVITY_RATES.length; j++) {
+        var xr = SENSITIVITY_RATES[j];
+        var xx = xPos(xr);
+        parts.push("<line x1=\"" + xx + "\" y1=\"" + padT + "\" x2=\"" + xx + "\" y2=\"" + (padT + plotH) + "\" stroke=\"#edf2f7\" stroke-width=\"1\"/>");
+        parts.push("<text x=\"" + xx + "\" y=\"" + (H - 16) + "\" text-anchor=\"middle\" font-size=\"12\" fill=\"#4a5568\" font-weight=\"600\">" + xr.toFixed(1) + "%</text>");
+      }
+
+      // 軸ラベル
+      parts.push("<text x=\"" + (padL + plotW / 2) + "\" y=\"" + (H - 2) + "\" text-anchor=\"middle\" font-size=\"12\" fill=\"#718096\">金利（年利）</text>");
+      parts.push("<text x=\"14\" y=\"" + (padT + plotH / 2) + "\" text-anchor=\"middle\" font-size=\"12\" fill=\"#718096\" transform=\"rotate(-90 14 " + (padT + plotH / 2) + ")\">利息削減額</text>");
+
+      // 折れ線
+      var points = [];
+      for (var k = 0; k < data.length; k++) {
+        points.push(xPos(data[k].rate) + "," + yPos(data[k].saved));
+      }
+      parts.push("<polyline points=\"" + points.join(" ") + "\" fill=\"none\" stroke=\"#38a169\" stroke-width=\"2.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>");
+
+      // データ点
+      for (var m = 0; m < data.length; m++) {
+        var d = data[m];
+        var cx = xPos(d.rate);
+        var cy = yPos(d.saved);
+        if (d.isCurrent) {
+          parts.push("<circle cx=\"" + cx + "\" cy=\"" + cy + "\" r=\"8\" fill=\"#3182ce\" stroke=\"#fff\" stroke-width=\"2\"/>");
+        } else {
+          parts.push("<circle cx=\"" + cx + "\" cy=\"" + cy + "\" r=\"5\" fill=\"#38a169\" stroke=\"#fff\" stroke-width=\"1.5\"/>");
+        }
+        parts.push("<text x=\"" + cx + "\" y=\"" + (cy - 12) + "\" text-anchor=\"middle\" font-size=\"10\" fill=\"#276749\" font-weight=\"600\">" + formatAxisYen(d.saved) + "</text>");
+      }
+
+      svg.innerHTML = parts.join("");
+    }
+
+    /**
+     * 投資利益を計算する
+     *
+     * 式: 投資利益 = 元本 × (1 + 月利)^運用月数 − 元本
+     *   月利 R = 年利(%) ÷ 100 ÷ 12
+     */
+    function calcInvestProfit(principal, annualRatePercent, months) {
+      var r = annualRatePercent / 100 / 12;
+      if (r === 0 || principal <= 0 || months <= 0) return 0;
+      return principal * Math.pow(1 + r, months) - principal;
+    }
+
+    /**
+     * 損益分岐利回り（年利%）を求める
+     *
+     * 条件: 投資利益 = 利息削減額（interestSaved）
+     *
+     * 理論式（P=元本, T=運用月数, S=利息削減額）:
+     *   P × (1 + R)^T − P = S
+     *   (1 + R)^T = 1 + S/P
+     *   R = (1 + S/P)^(1/T) − 1     … R は月利
+     *   年利(%) = R × 12 × 100
+     *
+     * 実装: 上記と同じ結果になるよう、0%〜30%の範囲で二分探索
+     */
+    function findBreakEvenRate(principal, interestSaved, investMonths) {
+      if (principal <= 0 || investMonths <= 0) return null;
+      if (interestSaved <= 0) return 0;
+
+      var lo = 0;
+      var hi = 30;
+      for (var i = 0; i < 80; i++) {
+        var mid = (lo + hi) / 2;
+        if (calcInvestProfit(principal, mid, investMonths) > interestSaved) {
+          hi = mid;
+        } else {
+          lo = mid;
+        }
+      }
+      return (lo + hi) / 2;
+    }
+
+    /** 現在の投資利回りと損益分岐利回りを比較して判定 */
+    function getBreakEvenJudgment(currentRate, breakEvenRate) {
+      var diff = currentRate - breakEvenRate;
+      if (diff > 0.05) {
+        return { text: "投資有利", cssClass: "invest-better" };
+      }
+      if (diff < -0.05) {
+        return { text: "繰上返済有利", cssClass: "prepay-better" };
+      }
+      return { text: "ほぼ同等", cssClass: "neutral" };
+    }
+
+    function formatPercent(value) {
+      return value.toFixed(2) + "%";
+    }
+
+    function renderBreakEven(prepay, interestSaved, investMonths, investRate) {
+      var breakEven = findBreakEvenRate(prepay, interestSaved, investMonths);
+
+      if (breakEven === null) {
+        document.getElementById("breakEvenRate").textContent = "—";
+        document.getElementById("currentInvestRate").textContent = formatPercent(investRate);
+        document.getElementById("breakEvenVerdict").textContent = "—";
+        document.getElementById("breakEvenVerdictCard").className = "judgment-card verdict-card";
+        document.getElementById("breakEvenNote").textContent = "";
+        return;
+      }
+
+      var judgment = getBreakEvenJudgment(investRate, breakEven);
+
+      document.getElementById("breakEvenRate").textContent = formatPercent(breakEven);
+      document.getElementById("currentInvestRate").textContent = formatPercent(investRate);
+      document.getElementById("breakEvenVerdict").textContent = judgment.text;
+      document.getElementById("breakEvenVerdictCard").className =
+        "judgment-card verdict-card " + judgment.cssClass;
+
+      var note = "投資利回りが " + formatPercent(breakEven) + " を超えると投資が有利、";
+      note += "下回ると繰上返済が有利です。";
+      note += "（運用期間 " + investMonths + "ヶ月・利息削減額 " + formatYen(interestSaved) + " で計算）";
+      document.getElementById("breakEvenNote").textContent = note;
+    }
+
+    /* 直近の計算結果を保持（表示単位切替時に再計算せず表示だけ更新） */
+    var lastCalcData = null;
+
+    /** 保存済みの計算結果をもとに、画面上の金額表示をすべて更新 */
+    function refreshAllDisplays() {
+      if (!lastCalcData) return;
+
+      var d = lastCalcData;
+      var result = d.result;
+
+      renderLoanOverview(result);
+
+      document.getElementById("totalInterestBefore").textContent = formatMoney(d.totalInterestBefore);
+      document.getElementById("totalInterestAfter").textContent = formatMoney(d.totalInterestAfter);
+      document.getElementById("interestSaved").textContent = formatMoney(d.interestSaved);
+
+      updateBar("barBefore", "barBeforeAmount", d.totalInterestBefore, d.totalInterestBefore);
+      updateBar("barAfter", "barAfterAmount", d.totalInterestAfter, d.totalInterestBefore);
+      updateBar("barSaved", "barSavedAmount", d.interestSaved, d.totalInterestBefore);
+
+      document.getElementById("termNote").innerHTML = buildResultNote(result);
+
+      document.getElementById("futureValue").textContent = formatMoney(d.futureValue);
+      document.getElementById("investSub").textContent =
+        "運用益 " + formatMoney(d.investProfit) + "（" + d.investMonths + "ヶ月運用）";
+
+      var diffEl = document.getElementById("difference");
+      diffEl.textContent = (d.difference >= 0 ? "+" : "") + formatMoney(d.difference);
+      diffEl.className = "result-value " + (d.difference >= 0 ? "positive" : "negative");
+
+      var verdictBox = document.getElementById("verdictBox");
+      var verdictText = document.getElementById("verdictText");
+      verdictBox.className = "result-item verdict";
+      if (d.verdictType === "invest") {
+        verdictBox.classList.add("invest-better");
+        verdictText.textContent = "→ 投資の方が有利（期待値ベース）";
+      } else if (d.verdictType === "prepay") {
+        verdictBox.classList.add("prepay-better");
+        verdictText.textContent = "→ 繰上返済の方が有利";
+      } else {
+        verdictText.textContent = "→ ほぼ同等";
+      }
+
+      renderSensitivity(d.balance, d.years, d.prepay, d.rate, d.prepayType);
+      renderBreakEven(d.prepay, d.interestSaved, d.investMonths, d.investRate);
+    }
+
+    function calculate() {
+      var balance = parseInputNumber(document.getElementById("balance").value);
+      var rate = Number(document.getElementById("rate").value);
+      var years = Number(document.getElementById("years").value);
+      var prepay = parseInputNumber(document.getElementById("prepay").value);
+      var investRate = Number(document.getElementById("investRate").value);
+      var prepayType = getPrepayType();
+
+      var errorEl = document.getElementById("error");
+      errorEl.classList.remove("show");
+      errorEl.textContent = "";
+
+      if (!balance || balance <= 0) { showError("ローン残高を正しく入力してください"); return; }
+      if (years <= 0) { showError("残年数は1年以上を入力してください"); return; }
+      if (prepay < 0) { showError("繰上返済額は0円以上を入力してください"); return; }
+      if (prepay >= balance) { showError("繰上返済額はローン残高より少なくしてください"); return; }
+      if (rate < 0 || investRate < 0) { showError("金利・投資利回りは0%以上を入力してください"); return; }
+
+      var months = years * 12;
+
+      try {
+        var result = calcPrepaymentScenario(balance, rate, months, prepay, prepayType);
+        if (!result) {
+          showError("繰上返済額が大きすぎるため計算できません");
+          return;
+        }
+
+        var totalInterestBefore = result.totalInterestBefore;
+        var totalInterestAfter = result.totalInterestAfter;
+        var interestSaved = result.interestSaved;
+        var investMonths = result.remainingMonthsAfter;
+        var investProfit = calcInvestProfit(prepay, investRate, investMonths);
+        var futureValue = prepay + investProfit;
+        var difference = investProfit - interestSaved;
+
+        var verdictType = "neutral";
+        if (difference > 1000) verdictType = "invest";
+        else if (difference < -1000) verdictType = "prepay";
+
+        // 計算結果を保存し、表示を更新（表示単位は formatMoney が参照）
+        lastCalcData = {
+          result: result,
+          balance: balance,
+          years: years,
+          prepay: prepay,
+          rate: rate,
+          prepayType: prepayType,
+          investRate: investRate,
+          totalInterestBefore: totalInterestBefore,
+          totalInterestAfter: totalInterestAfter,
+          interestSaved: interestSaved,
+          investMonths: investMonths,
+          investProfit: investProfit,
+          futureValue: futureValue,
+          difference: difference,
+          verdictType: verdictType
         };
-      }
-
-      const growth = Math.pow(1 + monthlyRate, monthsToGoal);
-      const annuityFactor = (growth - 1) / monthlyRate;
-      const shortfall = targetYen - projectedWithCurrent;
-      const additionalYen = Math.ceil(shortfall / annuityFactor);
-
-      return { additionalYen: Math.max(0, additionalYen), achievable: false };
-    }
-
-    // ── プリセットボタン ────────────────────────────────────
-
-    /** 目標額入力に合わせてプリセットボタンの選択状態を更新 */
-    function syncPresetButtons(targetMan) {
-      presetButtons.forEach((btn) => {
-        const isActive = Number(btn.dataset.target) === targetMan;
-        btn.classList.toggle('active', isActive);
-        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-      });
-    }
-
-    /** プリセットボタン押下で目標額をセットし再計算 */
-    function setupPresetButtons() {
-      presetButtons.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const targetMan = Number(btn.dataset.target);
-          inputs.targetAmount.value = formatInputComma(targetMan);
-          hints.targetAmount.textContent = formatManYen(targetMan);
-          syncPresetButtons(targetMan);
-          update();
-        });
-      });
-    }
-
-    // ── 結果表示 ────────────────────────────────────────────
-
-    /** 目標との差額カード（達成=緑 / 不足=赤） */
-    function renderDiffCard(projectedYen, targetYen, childAge) {
-      const { diffCard, diffValue, diffNote } = resultEls;
-      diffCard.className = 'diff-card';
-
-      if (childAge >= GOAL_AGE) {
-        diffCard.classList.add('neutral');
-        diffValue.textContent = '—';
-        diffNote.textContent = '18歳以上のため、積立シミュレーションの対象外です。';
-        return;
-      }
-
-      const diff = projectedYen - targetYen;
-
-      if (diff >= 0) {
-        diffCard.classList.add('good');
-        diffValue.textContent = '余剰額 ' + formatMoney(diff);
-        diffNote.textContent =
-          '目標 ' + formatMoney(targetYen) + ' に対し、' +
-          formatMoney(projectedYen) + ' の見込みです。';
-      } else {
-        diffCard.classList.add('bad');
-        diffValue.textContent = '不足額 ' + formatMoney(Math.abs(diff));
-        diffNote.textContent =
-          '目標 ' + formatMoney(targetYen) + ' に対し、' +
-          formatMoney(projectedYen) + ' の見込みです。';
+        refreshAllDisplays();
+      } catch (e) {
+        showError(e.message || "計算エラーが発生しました");
       }
     }
 
-    /** 18歳時点の予想教育資金カード */
-    function renderProjectedCard(projectedYen, targetYen, childAge) {
-      const { projectedFund, projectedSub, age18Label, remainingYears, statusBadge } = resultEls;
+    function showError(msg) {
+      lastCalcData = null;
+      document.getElementById("error").textContent = msg;
+      document.getElementById("error").classList.add("show");
 
-      if (childAge >= GOAL_AGE) {
-        age18Label.textContent = childAge + ' 歳（積立終了）';
-        remainingYears.textContent = '積立期間終了';
-        remainingYears.className = 'result-remaining ended';
-        statusBadge.textContent = 'ℹ 参考表示';
-        statusBadge.className = 'status-badge neutral';
-        projectedFund.textContent = formatMoney(projectedYen);
-        projectedSub.textContent = '18歳到達後のため、現在の教育資金を表示しています。';
-        return;
-      }
+      var dash = "—";
+      document.getElementById("totalInterestBefore").textContent = dash;
+      document.getElementById("totalInterestAfter").textContent = dash;
+      document.getElementById("interestSaved").textContent = dash;
+      document.getElementById("futureValue").textContent = dash;
+      document.getElementById("difference").textContent = dash;
+      document.getElementById("investSub").textContent = "";
+      document.getElementById("verdictText").textContent = "";
+      document.getElementById("termNote").textContent = "";
 
-      const yearsLeft = GOAL_AGE - childAge;
-      const diff = projectedYen - targetYen;
+      document.getElementById("monthlyPaymentBefore").textContent = dash;
+      document.getElementById("loanOverviewExtra").innerHTML = "";
 
-      age18Label.textContent = GOAL_AGE + ' 歳';
-      remainingYears.textContent = '大学進学まで残り' + yearsLeft + '年';
-      remainingYears.className = 'result-remaining';
-      projectedFund.textContent = formatMoney(projectedYen);
-      projectedSub.textContent = '目標額 ' + formatMoney(targetYen);
+      updateBar("barBefore", "barBeforeAmount", 0, 1);
+      updateBar("barAfter", "barAfterAmount", 0, 1);
+      updateBar("barSaved", "barSavedAmount", 0, 1);
 
-      if (diff >= 0) {
-        statusBadge.textContent = '🎉 目標達成見込み';
-        statusBadge.className = 'status-badge good';
-      } else {
-        statusBadge.textContent = '⚠ 要対策';
-        statusBadge.className = 'status-badge warning';
-      }
+      document.getElementById("sensitivityBody").innerHTML = "";
+      document.getElementById("sensitivityChart").innerHTML = "";
+
+      document.getElementById("breakEvenRate").textContent = dash;
+      document.getElementById("currentInvestRate").textContent = dash;
+      document.getElementById("breakEvenVerdict").textContent = dash;
+      document.getElementById("breakEvenVerdictCard").className = "judgment-card verdict-card";
+      document.getElementById("breakEvenNote").textContent = "";
     }
 
-    /** 必要積立額の逆算カード（達成=緑 / 不足=オレンジ） */
-    function renderRequiredCard(simParams, projectedYen, targetYen, childAge) {
-      const { requiredCard, requiredMessage, requiredNote } = resultEls;
-      requiredCard.className = 'required-card';
-
-      if (childAge >= GOAL_AGE) {
-        requiredCard.classList.add('neutral');
-        requiredMessage.textContent = '—';
-        requiredNote.textContent = '18歳以上のため、積立シミュレーションの対象外です。';
-        return;
-      }
-
-      const { additionalYen, achievable } = calcAdditionalMonthlyYen(simParams);
-
-      if (achievable || projectedYen >= targetYen) {
-        requiredCard.classList.add('good');
-        requiredMessage.textContent = '現在の積立額で目標達成見込みです';
-        requiredNote.textContent =
-          '想定利回り ' + simParams.annualReturnRate + '% を前提に、' +
-          '18歳まで現在の積立を続ければ目標に到達できる見込みです。';
-        return;
-      }
-
-      requiredCard.classList.add('warning');
-      requiredMessage.textContent =
-        '目標達成には 毎月あと ' + formatYen(additionalYen) + ' の積立が必要です';
-      requiredNote.textContent =
-        '現在の積立額（' + formatYen(simParams.monthlyContributionYen) + '）に加え、' +
-        'あと ' + formatYen(additionalYen) + ' を毎月積み立てると目標達成の見込みです。' +
-        '（残り ' + ((GOAL_AGE - childAge) * 12) + ' ヶ月・想定利回り ' +
-        simParams.annualReturnRate + '% で逆算）';
+    var inputs = document.querySelectorAll("input");
+    for (var i = 0; i < inputs.length; i++) {
+      if (inputs[i].id === "balance" || inputs[i].id === "prepay") continue;
+      if (inputs[i].name === "displayUnit") continue;
+      inputs[i].addEventListener("input", calculate);
+      inputs[i].addEventListener("change", calculate);
     }
 
-    /** 判定カード */
-    function renderJudgment(projectedYen, targetYen, childAge) {
-      const { judgmentCard, judgmentMessage, judgmentDetail, judgmentNote } = resultEls;
-      judgmentCard.className = 'judgment-card';
+    // 表示単位切替: 再計算せず表示だけ即時更新
+    var unitInputs = document.querySelectorAll('input[name="displayUnit"]');
+    for (var u = 0; u < unitInputs.length; u++) {
+      unitInputs[u].addEventListener("change", refreshAllDisplays);
+    }
 
-      if (childAge >= GOAL_AGE) {
-        judgmentCard.classList.add('unavailable');
-        judgmentMessage.textContent = '18歳以上のため対象外';
-        judgmentDetail.textContent = '';
-        judgmentNote.textContent = '判定は18歳時点の予想教育資金をもとに表示します。';
-        return;
+    setupMoneyInput("balance");
+    setupMoneyInput("prepay");
+
+    // 初期表示をカンマ区切りにする
+    document.getElementById("balance").value = formatInputComma(parseInputNumber(document.getElementById("balance").value));
+    document.getElementById("prepay").value = formatInputComma(parseInputNumber(document.getElementById("prepay").value));
+
+    calculate();
+
+    /*
+     * 関連ツール一覧
+     * 現在表示中のツール（getCurrentToolId）以外をカード表示する
+     */
+    var ALL_TOOLS = [
+      {
+        id: "mortgage-invest",
+        name: "住宅ローン × 投資比較シミュレーター",
+        url: "https://mortgage-invest-simulator.vercel.app/",
+        popular: true,
+        desc: "繰上返済と投資のどちらが有利か比較できます。"
+      },
+      {
+        id: "asset",
+        name: "資産推移シミュレーター",
+        url: "https://asset-simulator-five.vercel.app/",
+        desc: "毎月の積立や運用による資産形成を試算できます。"
+      },
+      {
+        id: "education",
+        name: "教育費シミュレーター",
+        url: "https://education-fund-simulator.vercel.app/",
+        desc: "お子さまの進路に合わせた教育資金を試算できます。"
+      },
+      {
+        id: "car",
+        name: "車買い替え比較シミュレーター",
+        url: "https://car-cost-simulator-jet.vercel.app/",
+        desc: "現在の車を維持する場合と買い替える場合の費用を比較できます。"
+      }
+    ];
+
+    /** URLから現在のツールIDを判定（ローカル表示時は住宅ローン） */
+    function getCurrentToolId() {
+      var host = location.hostname;
+      if (host.indexOf("mortgage-invest") >= 0) return "mortgage-invest";
+      if (host.indexOf("asset-simulator") >= 0) return "asset";
+      if (host.indexOf("education-fund") >= 0) return "education";
+      if (host.indexOf("car-cost") >= 0) return "car";
+      return "mortgage-invest";
+    }
+
+    /** 関連ツールカードを描画（現在のツールは除外） */
+    function renderRelatedTools() {
+      var currentId = getCurrentToolId();
+      var list = document.getElementById("relatedToolsList");
+      var html = [];
+
+      for (var i = 0; i < ALL_TOOLS.length; i++) {
+        var tool = ALL_TOOLS[i];
+        if (tool.id === currentId) continue;
+
+        html.push(
+          '<a class="related-tool-card" href="' + tool.url + '" target="_blank" rel="noopener noreferrer">' +
+          (tool.popular ? '<span class="related-tool-badge">🏆 人気No.1</span>' : "") +
+          '<span class="related-tool-name">' + tool.name + "</span>" +
+          '<span class="related-tool-desc">' + tool.desc + "</span></a>"
+        );
       }
 
-      const diff = projectedYen - targetYen;
-
-      if (diff >= 0) {
-        judgmentCard.classList.add('good');
-        judgmentMessage.textContent = '✓ 目標達成見込み';
-        judgmentDetail.textContent =
-          '目標額を' + formatMoney(diff) + '上回る見込みです。';
-        judgmentNote.textContent =
-          '現在の積立ペースを維持できれば、教育資金目標を達成できる見込みです。';
-      } else {
-        judgmentCard.classList.add('warning');
-        judgmentMessage.textContent = '⚠ 追加積立が必要';
-        judgmentDetail.textContent =
-          '目標額まで' + formatMoney(Math.abs(diff)) + '不足する見込みです。';
-        judgmentNote.textContent =
-          '毎月積立額の増額や、目標額の見直しをご検討ください。';
-      }
+      list.innerHTML = html.join("");
     }
 
-    /** おすすめアクションカード */
-    function renderActionCard(simParams, projectedYen, targetYen, childAge) {
-      const {
-        actionCard,
-        actionRows,
-        actionCurrent,
-        actionRequired,
-        actionIncrease,
-        actionSummary,
-      } = resultEls;
-
-      actionCard.className = 'action-card';
-
-      if (childAge >= GOAL_AGE) {
-        actionCard.classList.add('neutral');
-        actionRows.style.display = 'none';
-        actionSummary.textContent = '18歳以上のため、積立シミュレーションの対象外です。';
-        return;
-      }
-
-      actionRows.style.display = '';
-      const currentMonthly = simParams.monthlyContributionYen;
-      const { additionalYen, achievable } = calcAdditionalMonthlyYen(simParams);
-      const isAchieved = achievable || projectedYen >= targetYen;
-      const requiredMonthly = currentMonthly + additionalYen;
-
-      actionCurrent.textContent = formatYen(currentMonthly) + '/月';
-
-      if (isAchieved) {
-        actionCard.classList.add('good');
-        actionRows.style.display = 'none';
-        actionSummary.textContent = '現在の積立額で目標達成見込みです';
-        return;
-      }
-
-      actionCard.classList.add('warning');
-      actionRequired.textContent = formatYen(requiredMonthly) + '/月';
-      actionIncrease.textContent = '＋' + formatYen(additionalYen) + '/月';
-      actionSummary.textContent =
-        'あと' + formatYen(additionalYen) + '/月の増額を検討しましょう';
-    }
-
-    // ── グラフ ──────────────────────────────────────────────
-
-    const CHART_COLORS = {
-      fund: { border: '#2563eb', fill: 'rgba(37, 99, 235, 0.15)' },
-      goal: { border: '#7c3aed' },
-    };
-
-    let chart = null;
-
-    function initChart() {
-      const ctx = document.getElementById('fundChart').getContext('2d');
-      chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: [],
-          datasets: [
-            {
-              label: '教育資金',
-              data: [],
-              borderColor: CHART_COLORS.fund.border,
-              backgroundColor: CHART_COLORS.fund.fill,
-              borderWidth: 2.5,
-              pointRadius: 3,
-              pointHoverRadius: 5,
-              pointBackgroundColor: CHART_COLORS.fund.border,
-              fill: true,
-              tension: 0.25,
-            },
-            {
-              label: '目標額',
-              data: [],
-              borderColor: CHART_COLORS.goal.border,
-              backgroundColor: 'transparent',
-              borderWidth: 2,
-              borderDash: [6, 4],
-              pointRadius: 0,
-              pointHoverRadius: 0,
-              fill: false,
-              tension: 0,
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          interaction: { mode: 'index', intersect: false },
-          plugins: {
-            legend: { display: false },
-            tooltip: {
-              callbacks: {
-                title: (items) => items[0].label + ' 歳',
-                label: (item) => ' ' + item.dataset.label + ': ' + formatMoney(item.raw),
-              },
-            },
-          },
-          scales: {
-            x: {
-              title: { display: true, text: '子どもの年齢（歳）', font: { size: 12 } },
-              grid: { display: false },
-              ticks: {
-                callback: (v) => chart.data.labels[v] + ' 歳',
-                maxTicksLimit: 19,
-              },
-            },
-            y: {
-              beginAtZero: true,
-              title: { display: true, text: '教育資金', font: { size: 12 } },
-              grid: { color: '#e2e8f0' },
-              ticks: {
-                callback: (v) => {
-                  if (v >= 10000) return (v / 10000).toLocaleString('ja-JP') + '万';
-                  return v.toLocaleString('ja-JP');
-                },
-              },
-            },
-          },
-        },
-      });
-    }
-
-    function updateChart(timeline, targetYen) {
-      chart.data.labels = timeline.map((d) => d.age);
-      chart.data.datasets[0].data = timeline.map((d) => Math.round(d.fundYen));
-      chart.data.datasets[1].data = timeline.map(() => Math.round(targetYen));
-      chart.update('none');
-    }
-
-    // ── 画面更新 ────────────────────────────────────────────
-
-    function update() {
-      const childAge = getChildAgeFromInput();
-      const targetMan = parseInputNumber(inputs.targetAmount.value);
-      const targetYen = targetMan * 10000;
-      const initialFundYen = parseInputNumber(inputs.currentFund.value);
-      const monthlyContributionYen = parseInputNumber(inputs.monthlyContribution.value);
-      const returnRate = Math.max(0, parseNumberInput(inputs.returnRate, 0));
-
-      syncChildAgeInputValue(false);
-      syncPresetButtons(targetMan);
-
-      const simParams = {
-        childAge,
-        targetYen,
-        initialFundYen,
-        monthlyContributionYen,
-        annualReturnRate: returnRate,
-      };
-
-      const result = simulate(simParams);
-
-      renderProjectedCard(result.projectedYen, result.targetYen, result.childAge);
-      renderDiffCard(result.projectedYen, result.targetYen, result.childAge);
-      renderRequiredCard(simParams, result.projectedYen, result.targetYen, result.childAge);
-      renderJudgment(result.projectedYen, result.targetYen, result.childAge);
-      renderActionCard(simParams, result.projectedYen, result.targetYen, result.childAge);
-      updateChart(result.timeline, result.targetYen);
-    }
-
-    // ── 初期化 ──────────────────────────────────────────────
-
-    initChart();
-    setupPresetButtons();
-
-    setupMoneyInput(inputs.targetAmount, hints.targetAmount, 'man');
-    setupMoneyInput(inputs.currentFund, hints.currentFund, 'yen');
-    setupMoneyInput(inputs.monthlyContribution, hints.monthlyContribution, 'yen');
-
-    inputs.targetAmount.value = formatInputComma(parseInputNumber(inputs.targetAmount.value));
-    hints.targetAmount.textContent = formatManYen(parseInputNumber(inputs.targetAmount.value));
-
-    inputs.currentFund.value = formatInputComma(parseInputNumber(inputs.currentFund.value));
-    hints.currentFund.textContent = formatYen(parseInputNumber(inputs.currentFund.value));
-
-    inputs.monthlyContribution.value = formatInputComma(parseInputNumber(inputs.monthlyContribution.value));
-    hints.monthlyContribution.textContent = formatYen(parseInputNumber(inputs.monthlyContribution.value));
-
-    inputs.childAge.addEventListener('input', update);
-    inputs.childAge.addEventListener('change', update);
-    inputs.childAge.addEventListener('blur', () => {
-      syncChildAgeInputValue(true);
-      update();
-    });
-    inputs.returnRate.addEventListener('input', update);
-
-    update();
+    renderRelatedTools();
   </script>
 </body>
 </html>

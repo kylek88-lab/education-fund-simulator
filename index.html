@@ -867,6 +867,101 @@
       font-weight: 700;
     }
 
+    /* コラム（ツール集記事と同一構造） */
+    .article-column {
+      margin-top: 20px;
+    }
+
+    .article-header {
+      background: linear-gradient(135deg, #2b6cb0, #3182ce);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 28px 22px;
+      margin-bottom: 24px;
+    }
+
+    .article-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    .article-header h1 {
+      font-size: clamp(1.05rem, 4.2vw, 1.35rem);
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    .article-body {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 24px 22px;
+      margin-bottom: 20px;
+    }
+
+    .article-body h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #2b6cb0;
+      margin: 28px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #ebf4ff;
+    }
+
+    .article-body h2:first-child {
+      margin-top: 0;
+    }
+
+    .article-body p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.85;
+    }
+
+    .article-body p + p {
+      margin-top: 1em;
+    }
+
+    .article-body ul {
+      margin: 0.8em 0 0;
+      padding-left: 1.4em;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.85;
+    }
+
+    .article-body li + li {
+      margin-top: 0.35em;
+    }
+
+    .article-body a {
+      color: #2b6cb0;
+      font-weight: 600;
+    }
+
+    .article-body a:hover,
+    .article-body a:focus-visible {
+      color: #1e4e8c;
+      outline: none;
+    }
+
+    .article-note {
+      margin-top: 24px;
+      padding: 14px 16px;
+      background: #f7fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
     /* 関連ツール */
     .related-tools {
       margin-top: 20px;
@@ -927,6 +1022,104 @@
       color: var(--text-muted);
       line-height: 1.55;
     }
+
+    /* 用語説明・結果ガイド（全シミュレーター共通） */
+    .label-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .label-row label {
+      margin-bottom: 0;
+    }
+
+    .term-help-btn {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid #cbd5e0;
+      background: #edf2f7;
+      color: #4a5568;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      flex-shrink: 0;
+      line-height: 1;
+      padding: 0;
+      font-family: inherit;
+    }
+
+    .term-help-btn:hover,
+    .term-help-btn:focus-visible {
+      background: #dbeafe;
+      border-color: #90cdf4;
+      outline: none;
+    }
+
+    .term-help-panel {
+      display: none;
+      margin: 0 0 10px;
+      padding: 10px 12px;
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      color: #4a5568;
+      line-height: 1.65;
+    }
+
+    .term-help-panel.open {
+      display: block;
+    }
+
+    .result-guide {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      background: #f7fafc;
+    }
+
+    .result-guide-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #4a5568;
+      margin-bottom: 8px;
+    }
+
+    .result-guide-body {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: #2d3748;
+    }
+
+    .result-guide-detail {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.8rem;
+      color: #718096;
+    }
+
+    .result-guide--good {
+      border-left: 4px solid #38a169;
+      background: #f0fff4;
+    }
+
+    .result-guide--warn {
+      border-left: 4px solid #d69e2e;
+      background: #fffff0;
+    }
+
+    .result-guide--bad {
+      border-left: 4px solid #e53e3e;
+      background: #fff5f5;
+    }
+
+    .result-guide--neutral {
+      border-left: 4px solid #cbd5e0;
+    }
   </style>
 </head>
 <body>
@@ -964,7 +1157,11 @@
         <h2>入力条件</h2>
         <form id="simForm" autocomplete="off">
           <div class="form-group">
-            <label for="childAge">子どもの現在年齢</label>
+            <div class="label-row">
+              <label for="childAge">子どもの現在年齢</label>
+              <button type="button" class="term-help-btn" data-term-help="childAge" aria-expanded="false" aria-label="子どもの現在年齢の説明">?</button>
+            </div>
+            <div class="term-help-panel" id="termHelp-childAge"></div>
             <div class="input-wrap">
               <input type="number" id="childAge" value="0" min="0" max="18" step="1">
               <span class="unit">歳</span>
@@ -972,7 +1169,11 @@
             <p class="hint">18歳までの積立・運用をシミュレーションします</p>
           </div>
           <div class="form-group">
-            <label for="targetAmount">教育資金目標額</label>
+            <div class="label-row">
+              <label for="targetAmount">教育資金目標額</label>
+              <button type="button" class="term-help-btn" data-term-help="targetAmount" aria-expanded="false" aria-label="教育資金目標額の説明">?</button>
+            </div>
+            <div class="term-help-panel" id="termHelp-targetAmount"></div>
             <div class="input-wrap">
               <input type="text" inputmode="numeric" class="money-input" id="targetAmount" value="500" autocomplete="off">
               <span class="unit">万円</span>
@@ -994,7 +1195,11 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="currentFund">現在の教育資金</label>
+            <div class="label-row">
+              <label for="currentFund">現在の教育資金</label>
+              <button type="button" class="term-help-btn" data-term-help="currentFund" aria-expanded="false" aria-label="現在の教育資金の説明">?</button>
+            </div>
+            <div class="term-help-panel" id="termHelp-currentFund"></div>
             <div class="input-wrap">
               <input type="text" inputmode="numeric" class="money-input" id="currentFund" value="0" autocomplete="off">
               <span class="unit">円</span>
@@ -1002,7 +1207,11 @@
             <p class="hint" id="currentFundHint">0円</p>
           </div>
           <div class="form-group">
-            <label for="monthlyContribution">毎月積立額</label>
+            <div class="label-row">
+              <label for="monthlyContribution">毎月積立額</label>
+              <button type="button" class="term-help-btn" data-term-help="monthlyContribution" aria-expanded="false" aria-label="毎月積立額の説明">?</button>
+            </div>
+            <div class="term-help-panel" id="termHelp-monthlyContribution"></div>
             <div class="input-wrap">
               <input type="text" inputmode="numeric" class="money-input" id="monthlyContribution" value="10000" autocomplete="off">
               <span class="unit">円</span>
@@ -1010,7 +1219,11 @@
             <p class="hint" id="monthlyContributionHint">10,000円</p>
           </div>
           <div class="form-group">
-            <label for="returnRate">想定利回り</label>
+            <div class="label-row">
+              <label for="returnRate">想定利回り</label>
+              <button type="button" class="term-help-btn" data-term-help="returnRate" aria-expanded="false" aria-label="想定利回りの説明">?</button>
+            </div>
+            <div class="term-help-panel" id="termHelp-returnRate"></div>
             <div class="input-wrap">
               <input type="number" id="returnRate" value="3" min="0" max="30" step="0.1">
               <span class="unit">%/年</span>
@@ -1080,6 +1293,8 @@
           </div>
         </div>
 
+        <div class="result-guide result-guide--neutral" id="resultGuideMain"></div>
+
         <div class="chart-legend" aria-hidden="true">
           <span class="legend-item"><span class="legend-swatch"></span>教育資金の推移</span>
           <span class="legend-item"><span class="legend-swatch goal"></span>目標額</span>
@@ -1123,6 +1338,96 @@
       <p class="admin-message-text">教育費だけでなく、住宅ローンや老後資金とのバランスも意識しながら、無理のない資産形成を考えてみてください。</p>
     </aside>
 
+    <section class="article-column" id="column-education" aria-labelledby="column-education-heading">
+      <header class="article-header">
+        <span class="article-label">コラム</span>
+        <h1 id="column-education-heading">子供の大学進学までに教育費はいくら必要？まずは500万円で考えてみる</h1>
+      </header>
+
+      <article class="article-body">
+        <p>
+          子どもが小さいうちは、教育費の実感があまりありません。
+        </p>
+        <p>
+          しかし大学進学が近づくと、
+        </p>
+        <p>
+          「結局いくら準備しておけばいいの？」
+        </p>
+        <p>
+          と不安になる方も多いと思います。
+        </p>
+        <p>
+          教育費シミュレーターでは、次のような目安を用意しています。
+        </p>
+        <ul>
+          <li>300万円：国公立中心</li>
+          <li>500万円：標準</li>
+          <li>800万円：私立理系想定</li>
+          <li>1000万円：余裕を持って準備</li>
+        </ul>
+        <p>
+          大学4年間の学費目安は、
+        </p>
+        <ul>
+          <li>国公立大学：約250万円</li>
+          <li>私立文系：約400万円</li>
+          <li>私立理系：約550万円</li>
+        </ul>
+        <p>
+          です。
+        </p>
+        <p>
+          ただし、これは主に学費です。
+        </p>
+        <p>
+          一人暮らしをする場合は家賃や生活費も必要になるため、実際にはさらに多くのお金がかかる可能性があります。
+        </p>
+
+        <h2>まずは500万円で試算してみる</h2>
+        <p>
+          進学先が決まっていない段階では、まず500万円を目標に試算するのがおすすめです。
+        </p>
+        <p>
+          そのうえで、
+        </p>
+        <ul>
+          <li>国公立を想定するなら300万円</li>
+          <li>私立理系を想定するなら800万円</li>
+          <li>一人暮らしの可能性も考えるなら1000万円</li>
+        </ul>
+        <p>
+          へ変更して比較してみると、必要な積立額の違いが分かります。
+        </p>
+
+        <h2>教育費は「早く知る」だけで有利</h2>
+        <p>
+          教育費は準備期間が長いほど有利です。
+        </p>
+        <p>
+          例えば10年かけて準備するのと、3年で準備するのでは毎月必要な積立額が大きく変わります。
+        </p>
+        <p>
+          まずはシミュレーターで、
+        </p>
+        <p>
+          「自分の家庭ならいくら必要なのか」
+        </p>
+        <p>
+          を確認してみてください。
+        </p>
+
+        <p>
+          まずは300万円・500万円・800万円・1000万円で比較しながら、ご家庭に合った目標額を確認してみましょう。
+          <a href="#simForm">上の入力欄で試算する</a>
+        </p>
+
+        <p class="article-note">
+          ※本記事は一般的な目安をもとにした解説であり、特定の金融商品や金融行動を推奨するものではありません。学費・生活費は学校や地域により異なります。
+        </p>
+      </article>
+    </section>
+
     <nav class="related-tools" aria-labelledby="related-tools-heading">
       <h2 class="related-tools-title" id="related-tools-heading">関連ツール</h2>
       <ul class="related-list">
@@ -1160,6 +1465,83 @@
   </div>
 
   <script>
+    /**
+     * 用語説明・結果ガイド共通UI
+     * 各シミュレーターの index.html に同内容を埋め込んで使用
+     */
+    var SimulatorUI = (function () {
+      /** 用語説明パネルにテキストをセットし、?ボタンの開閉を設定 */
+      function initTermHelp(terms) {
+        Object.keys(terms).forEach(function (key) {
+          var panel = document.getElementById("termHelp-" + key);
+          if (panel) panel.textContent = terms[key];
+        });
+
+        document.querySelectorAll(".term-help-btn").forEach(function (btn) {
+          btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            var key = btn.getAttribute("data-term-help");
+            var panel = document.getElementById("termHelp-" + key);
+            if (!panel) return;
+
+            var willOpen = !panel.classList.contains("open");
+            document.querySelectorAll(".term-help-panel").forEach(function (p) {
+              p.classList.remove("open");
+            });
+            document.querySelectorAll(".term-help-btn").forEach(function (b) {
+              b.setAttribute("aria-expanded", "false");
+            });
+
+            if (willOpen) {
+              panel.classList.add("open");
+              btn.setAttribute("aria-expanded", "true");
+            }
+          });
+        });
+      }
+
+      /** 結果の見方エリアを更新（level: good / warn / bad / neutral） */
+      function renderResultGuide(id, level, message, detail) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        el.className = "result-guide result-guide--" + level;
+        el.innerHTML =
+          '<div class="result-guide-title">結果の見方</div>' +
+          '<div class="result-guide-body">' +
+          message +
+          (detail
+            ? '<span class="result-guide-detail">' + detail + "</span>"
+            : "") +
+          "</div>";
+      }
+
+      function clearResultGuide(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        el.className = "result-guide result-guide--neutral";
+        el.innerHTML = "";
+      }
+
+      return {
+        initTermHelp: initTermHelp,
+        renderResultGuide: renderResultGuide,
+        clearResultGuide: clearResultGuide,
+      };
+    })();
+
+    var TERM_HELP = {
+      childAge:
+        "お子さまの今の年齢です。18歳になるまで何年積み立てられるかを計算するために使います。年齢が若いほど、毎月の積立額を抑えやすくなります。",
+      targetAmount:
+        "大学進学などに必要な教育費の目標金額です。学費や生活費の目安に合わせて設定してください。プリセットボタンでよく使われる目安を選べます。",
+      currentFund:
+        "すでに教育費として用意できているお金のことです。普通預金やジュニアNISAなど、今すぐ使える資金を含めて入力してください。",
+      monthlyContribution:
+        "毎月教育費用に積み立てる予定の金額です。家計の余裕を見ながら、無理のない範囲で設定してください。",
+      returnRate:
+        "運用によって毎年どれくらい増えるかの目安です。3%なら100万円が1年後に103万円程度になるイメージです。実際の成果は上下するため、あくまで目安として使います。",
+    };
+
     // ── 定数 ────────────────────────────────────────────────
     /** 大学進学の目標年齢 */
     const GOAL_AGE = 18;
@@ -1696,6 +2078,37 @@
       chart.update('none');
     }
 
+    /** 結果の見方ガイド（予想資金 vs 目標額） */
+    function updateResultGuide(projectedYen, targetYen, childAge) {
+      if (childAge >= GOAL_AGE || targetYen <= 0) {
+        SimulatorUI.clearResultGuide('resultGuideMain');
+        return;
+      }
+
+      if (projectedYen >= targetYen) {
+        SimulatorUI.renderResultGuide(
+          'resultGuideMain',
+          'good',
+          '🟢 目標を達成できそうです。現在の条件を継続できれば、大学進学時点で目標額に到達すると考えられます。',
+          '目標 ' + formatMoney(targetYen) + ' に対し、' + formatMoney(projectedYen) + ' の見込みです。'
+        );
+      } else if (projectedYen >= targetYen * 0.8) {
+        SimulatorUI.renderResultGuide(
+          'resultGuideMain',
+          'warn',
+          '🟡 目標に近づいています。積立額の少しの増額や見直しで、達成できる可能性があります。',
+          '目標の約' + Math.round((projectedYen / targetYen) * 100) + '%程度の見込みです。'
+        );
+      } else {
+        SimulatorUI.renderResultGuide(
+          'resultGuideMain',
+          'bad',
+          '🔴 目標との差が大きいと考えられます。積立額の増額や目標額の見直しを検討してみてください。',
+          '目標 ' + formatMoney(targetYen) + ' に対し、' + formatMoney(projectedYen) + ' の見込みです。'
+        );
+      }
+    }
+
     // ── 画面更新 ────────────────────────────────────────────
 
     function update() {
@@ -1719,6 +2132,12 @@
 
       const result = simulate(simParams);
 
+      if (targetMan <= 0) {
+        SimulatorUI.clearResultGuide('resultGuideMain');
+      } else {
+        updateResultGuide(result.projectedYen, result.targetYen, result.childAge);
+      }
+
       renderProjectedCard(result.projectedYen, result.targetYen, result.childAge);
       renderDiffCard(result.projectedYen, result.targetYen, result.childAge);
       renderRequiredCard(simParams, result.projectedYen, result.targetYen, result.childAge);
@@ -1729,6 +2148,7 @@
 
     // ── 初期化 ──────────────────────────────────────────────
 
+    SimulatorUI.initTermHelp(TERM_HELP);
     initChart();
     setupPresetButtons();
 
